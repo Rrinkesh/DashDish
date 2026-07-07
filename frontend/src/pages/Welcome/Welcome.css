@@ -1,0 +1,129 @@
+.welcome-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a0b2e 0%, #000000 100%);
+    z-index: 9999;
+    cursor: pointer;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.welcome-content {
+    text-align: center;
+    z-index: 10;
+    animation: zoomIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.welcome-text {
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    
+    /* 3D Text Effect */
+    text-shadow: 
+        0px 1px 0px #cccccc,
+        0px 2px 0px #c9c9c9,
+        0px 3px 0px #bbbbbb,
+        0px 4px 0px #b9b9b9,
+        0px 5px 0px #aaaaaa,
+        0px 6px 1px rgba(0,0,0,0.1),
+        0px 0px 5px rgba(0,0,0,0.1),
+        0px 1px 3px rgba(0,0,0,0.3),
+        0px 3px 5px rgba(0,0,0,0.2),
+        0px 5px 10px rgba(0,0,0,0.25),
+        0px 10px 10px rgba(0,0,0,0.2),
+        0px 20px 20px rgba(0,0,0,0.15);
+        
+    /* Gradient overlay for color */
+    background: linear-gradient(to right, #ff0055, #00b8ff, #7a00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    animation: float3D 6s ease-in-out infinite;
+}
+
+.welcome-subtext {
+    margin-top: 40px;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    animation: fadeInPulse 2s infinite alternate;
+}
+
+/* Colorful Orbs for Background */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.6;
+    animation: moveOrbs 15s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    background: #ff0055;
+    top: -100px;
+    left: -100px;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    background: #00b8ff;
+    bottom: -200px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: #7a00ff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -10s;
+}
+
+/* Animations */
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateZ(-500px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+    }
+}
+
+@keyframes float3D {
+    0% { transform: rotateX(10deg) rotateY(-10deg) translateZ(50px); }
+    50% { transform: rotateX(-5deg) rotateY(15deg) translateZ(80px); }
+    100% { transform: rotateX(10deg) rotateY(-10deg) translateZ(50px); }
+}
+
+@keyframes fadeInPulse {
+    0% { opacity: 0.3; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes moveOrbs {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(100px, 100px) scale(1.2); }
+    100% { transform: translate(-50px, 50px) scale(0.8); }
+}

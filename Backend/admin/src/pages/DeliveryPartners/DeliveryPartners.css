@@ -1,0 +1,156 @@
+.delivery-partners {
+    padding: 20px;
+    width: 100%;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filters input, .filters select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline-color: tomato;
+}
+
+.filters input {
+    flex: 1;
+    max-width: 300px;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    background: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.partner-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.partner-card.inactive {
+    opacity: 0.6;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.driver-info h3 {
+    margin: 0 0 5px 0;
+}
+.driver-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card-body p {
+    margin: 8px 0;
+    color: #444;
+}
+
+.card-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.toggle-btn.deactivate {
+    background: #ffeaa7;
+    color: #d63031;
+}
+.toggle-btn.activate {
+    background: #55efc4;
+    color: #00b894;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content input, .modal-content select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline-color: tomato;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancel-btn {
+    background: #f1f2f6;
+    color: #576574;
+}
+.save-btn {
+    background: tomato;
+    color: white;
+}

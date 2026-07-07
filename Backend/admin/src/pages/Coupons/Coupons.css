@@ -1,0 +1,82 @@
+.coupons-management {
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.coupons-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.coupons-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.create-btn {
+    background: #0055a5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.create-btn:hover { background: #004080; }
+
+.coupons-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eaeaea;
+    overflow-x: auto;
+}
+
+.coupons-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.coupons-table th, .coupons-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.coupons-table th {
+    background: #f9f9f9;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-badge.active { background: #e8f5e9; color: #2e7d32; }
+.status-badge.inactive { background: #ffebee; color: #c62828; }
+
+.btn-delete {
+    background: #ffebee;
+    color: #d32f2f;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn-delete:hover { background: #ffcdd2; }
+
+.no-data {
+    text-align: center;
+    padding: 40px !important;
+    color: #888;
+}

@@ -1,0 +1,148 @@
+.operations {
+  padding: 20px;
+  width: 100%;
+}
+
+.operations h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.kpi-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.kpi-card {
+  flex: 1;
+  min-width: 150px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-left: 5px solid #2ecc71;
+}
+
+.kpi-card h3 {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 10px;
+}
+
+.kpi-card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.kpi-card.waste { border-left-color: #e67e22; }
+.kpi-card.danger { border-left-color: #e74c3c; }
+.kpi-card.warning { border-left-color: #f1c40f; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.panel {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.panel h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.panel h4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Most Used List */
+.most-used-list {
+  list-style: none;
+  padding: 0;
+}
+
+.most-used-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+/* Optimization */
+.opt-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.opt-section li {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.opt-section.promote li {
+  background-color: #e8f8f5;
+  color: #1abc9c;
+}
+
+.opt-section.hide li {
+  background-color: #fdf2e9;
+  color: #d35400;
+}
+
+/* Waste */
+.waste-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.waste-form input, .waste-form select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.waste-form button {
+  padding: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.waste-history {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.waste-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.waste-reason {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 2px;
+}

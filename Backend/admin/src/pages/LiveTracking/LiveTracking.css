@@ -1,0 +1,48 @@
+.live-tracking {
+    padding: 20px;
+    width: 100%;
+}
+
+.tracking-summary {
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+}
+
+.summary-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 2rem;
+    color: tomato;
+}
+
+.summary-card p {
+    margin: 0;
+    color: #555;
+    font-weight: bold;
+}
+
+.map-wrapper {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.info-window h4 {
+    margin: 0 0 10px 0;
+    color: tomato;
+}
+
+.info-window p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #333;
+}

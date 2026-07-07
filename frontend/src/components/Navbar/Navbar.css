@@ -1,0 +1,147 @@
+.navbar {
+    padding: 25px 0px; /* slightly more padding for a cleaner look */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-white);
+    /* Removed the hard border line */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Softer, slightly larger shadow for separation */
+    margin-bottom: 20px;
+}
+.navbar .logo {
+    width: 150px;
+    transition: var(--standard-transition);
+    /* This makes the white background of the image transparent, leaving only the text/figure */
+    mix-blend-mode: multiply;
+}
+.navbar .logo:hover {
+    transform: scale(1.05);
+}
+.navbar-profile img {
+    width: 40px;
+    border-radius: 50%;
+}
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 90px;
+    color: var(--dominos-blue);
+    font-size: 18px;
+    font-weight: 600;
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.navbar button {
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid var(--dominos-blue);
+    color: var(--dominos-blue);
+    padding: 10px 30px;
+    border-radius: 4px; /* Domino's uses subtle rounding */
+    cursor: pointer;
+    transition: var(--standard-transition);
+}
+.navbar button:hover {
+    background-color: var(--dominos-blue);
+    color: var(--bg-white);
+}
+.navbar-menu .active {
+    color: var(--dominos-red);
+    font-weight: 700;
+}
+.navbar li {
+    cursor: pointer;
+    transition: var(--standard-transition);
+}
+.navbar li:hover {
+    color: var(--dominos-red);
+}
+.navbar-search-icon {
+    position: relative;
+    cursor: pointer;
+}
+.navbar-search-icon img {
+    /* No invert needed on white background */
+    filter: none;
+}
+.navbar-search-icon .dot {
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: var(--dominos-red);
+    border-radius: 5px;
+    top: -8px;
+    right: -8px;
+}
+.navbar-profile {
+    position: relative;
+    cursor: pointer;
+}
+.nav-profile-dropdown {
+    position: absolute;
+    display: none;
+    right: 0;
+    z-index: 1;
+    /* Bridge the gap so hover state isn't lost */
+    top: 100%;
+    padding-top: 10px;
+}
+.nav-profile-dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+.nav-profile-dropdown img {
+    width: 20px;
+    filter: none;
+}
+.navbar-profile:hover .nav-profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--bg-white);
+    padding: 12px 25px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    list-style: none;
+    box-shadow: var(--dominos-shadow);
+    animation: fadeIn 0.3s ease;
+}
+.nav-profile-dropdown li:hover {
+    color: var(--dominos-red);
+}
+
+@media(max-width:900px){
+    .navbar .logo{
+        width: 140px;
+    }
+    .navbar-menu{
+        gap: 15px;
+        font-size: 16px;
+    }
+    .navbar-right{
+        gap: 20px;
+    }
+    .navbar-right img{
+        width: 20px;
+    }
+    .navbar-right button{
+        padding: 7px 20px;
+        font-size: 15px;
+    }
+}
+
+@media(max-width:750px){
+    .navbar-menu{
+        display: none;
+    }
+}

@@ -1,0 +1,202 @@
+.tracking-page {
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.tracking-header h2 {
+    color: tomato;
+    margin-bottom: 5px;
+}
+
+.tracking-header p {
+    color: #666;
+    font-weight: 500;
+}
+
+.status-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.status-timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #eee;
+    z-index: 1;
+}
+
+.timeline-step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    min-width: 100px;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: 4px solid #eee;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+}
+
+.timeline-step.completed .step-circle {
+    background: tomato;
+    border-color: tomato;
+}
+
+.timeline-step.active .step-circle {
+    border-color: tomato;
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+}
+
+.timeline-step p {
+    font-size: 0.85rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.tracking-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.map-section {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.eta-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.eta-card h3 {
+    margin: 0 0 10px 0;
+    color: #555;
+}
+
+.eta-card h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: tomato;
+}
+
+.driver-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.driver-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.driver-details h4 {
+    margin: 0 0 5px 0;
+}
+
+.driver-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+@media (max-width: 900px) {
+    .tracking-content {
+        grid-template-columns: 1fr;
+    }
+}
+.otp-card {
+    background: #fdf5e6;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px dashed tomato;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.otp-display {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: tomato;
+    margin: 10px 0;
+}
+.rating-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.rating-modal {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+.stars {
+    font-size: 40px;
+    margin: 20px 0;
+}
+.star {
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.star.selected {
+    color: #ffd700;
+}
+.rating-modal textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.submit-rating-btn {
+    background: tomato;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+}

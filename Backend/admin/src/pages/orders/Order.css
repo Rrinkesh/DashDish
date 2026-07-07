@@ -1,0 +1,113 @@
+.admin-stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    background: var(--bg-white, #fff);
+    border: 1px solid var(--border-color, #eaeaea);
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    min-width: 120px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.2s;
+    animation: fadeIn 0.4s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-3px);
+}
+
+.stat-box h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-box p {
+    margin: 10px 0 0 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dominos-blue, #0055a5);
+}
+
+.stat-box.revenue p {
+    color: #4caf50;
+}
+
+.order-item {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+    align-items: start;
+    gap: 30px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    margin: 30px 0px;
+    font-size: 14px;
+    color: var(--text-dark);
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--standard-transition);
+}
+
+.order-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--dominos-blue);
+}
+
+.order-item-food, .order-item-name {
+    font-weight: 700;
+    color: var(--dominos-blue);
+}
+
+.order-item-name {
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.order-item-address {
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+.order-item select {
+    background-color: #f0f8ff;
+    border: 1px solid var(--dominos-blue);
+    width: max(10vw, 120px);
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    font-weight: 600;
+    color: var(--dominos-blue);
+    cursor: pointer;
+    transition: var(--standard-transition);
+}
+
+.order-item select:hover, .order-item select:focus {
+    background-color: var(--dominos-blue);
+    color: white;
+}
+
+@media (max-width: 1000px) {
+    .order-item {
+        font-size: 13px;
+        grid-template-columns: 0.5fr 2fr 1fr;
+        padding: 15px 15px;
+        gap: 15px;
+    }
+    .order-item select {
+        padding: 8px;
+        font-size: 13px;
+    }
+    .order-item img {
+        width: 50px;
+    }
+}

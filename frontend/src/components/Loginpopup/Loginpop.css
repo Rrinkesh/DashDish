@@ -1,0 +1,109 @@
+.loginpop{
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: grid;
+    top: 0;
+    left: 0;
+}
+.loginpopcontainer{
+    place-self: center;
+    width: max(25vw, 350px);
+    color: var(--text-dark);
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 35px 40px;
+    border-radius: 8px;
+    font-size: 15px;
+    animation: fadeIn 0.2s ease;
+}
+.loginpop-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dominos-blue);
+}
+.loginpop-title h2 {
+    font-weight: 700;
+}
+.loginpop-title img{
+    width: 20px;
+    cursor: pointer;
+    /* No invert for dark text */
+    filter: none; 
+    transition: var(--standard-transition);
+}
+.loginpop-title img:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+.loginpop-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.loginpop-inputs input{
+    outline: none;
+    border: 1px solid var(--border-color);
+    background: var(--bg-light);
+    color: var(--text-dark);
+    height: 40px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+}
+.loginpop-inputs input::placeholder {
+    color: var(--text-muted);
+}
+.loginpop-inputs input:focus {
+    border-color: var(--dominos-blue);
+    background: var(--bg-white);
+}
+.loginpopcontainer button{
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    width: 100%;
+    color: var(--bg-white);
+    background-color: var(--dominos-red);
+    align-self: center;
+    cursor: pointer;
+    transition: var(--standard-transition);
+}
+.loginpopcontainer button:hover {
+    background-color: #c8102e; /* Darker red */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.loginpop-condition{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+.loginpop-condition input{
+    margin-top: 2px;
+    accent-color: var(--dominos-red);
+}
+.loginpop p {
+    text-align: center;
+    font-size: 14px;
+}
+.loginpop p span{
+    color: var(--dominos-blue);
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.loginpop p span:hover {
+    text-decoration: underline;
+    color: var(--dominos-red);
+}

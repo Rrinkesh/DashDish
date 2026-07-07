@@ -1,0 +1,64 @@
+.recommended-section {
+    margin-top: 30px;
+    padding: 20px 0;
+    animation: fadeIn 1s ease-in;
+}
+
+.recommended-header {
+    margin-bottom: 20px;
+    padding: 0 10px; /* Slight padding to align with container edges */
+}
+
+.recommended-header h2 {
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.recommended-reason {
+    font-size: 14px;
+    color: var(--dominos-red);
+    font-weight: 600;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+}
+
+/* Horizontal Scroller */
+.recommended-scroller {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px; /* padding for box-shadows */
+    
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.recommended-scroller::-webkit-scrollbar {
+    display: none;
+}
+
+.recommended-list {
+    display: flex;
+    gap: 20px;
+    width: max-content; /* Allows it to expand horizontally based on content */
+}
+
+/* Limit card width so they don't stretch */
+.recommended-card-wrapper {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+/* Adjusting the Fooditem styles if they inherit bad widths */
+.recommended-card-wrapper .food-item {
+    margin: 0; 
+    height: 100%; 
+}
+
+@media(max-width: 768px) {
+    .recommended-card-wrapper {
+        width: 220px;
+    }
+}
