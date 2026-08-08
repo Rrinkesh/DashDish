@@ -1,22 +1,25 @@
 const couponModel = require('../models/couponModel');
-const ordermodel = require('../models/orderModel'); // For future validation
+const ordermodel = require('../models/ordermodel'); // For future validation
 const mongoose = require('mongoose');
 
 // Create a new coupon
 const createCoupon = async (req, res) => {
     try {
-        const { restaurantId } = req.user; // Set by auth + roleMiddleware
-        if (!restaurantId) return res.status(403).json({ success: false, message: "No restaurant assigned" });
-
+        const restaurantId = req.user?.restaurantId || req.body?.restaurantId || req.user?._id || null;
         const { code, discountType, discountValue, minOrderAmount, maxDiscountAmount, expiryDate, usageLimit, applicableCategories, applicableOrderTypes } = req.body;
 
-        const existing = await couponModel.findOne({ code: code.toUpperCase() });
+        if (!code || !discountValue || !expiryDate) {
+            return res.status(400).json({ success: false, message: "Please provide coupon code, discount value, and expiry date" });
+        }
+
+        const normalizedCode = String(code).trim().toUpperCase();
+        const existing = await couponModel.findOne({ code: normalizedCode });
         if (existing) {
             return res.json({ success: false, message: "Coupon code already exists" });
         }
 
         const newCoupon = new couponModel({
-            code: code.toUpperCase(),
+            code: normalizedCode,
             restaurantId,
             discountType,
             discountValue,
@@ -39,10 +42,9 @@ const createCoupon = async (req, res) => {
 // List all coupons for a restaurant
 const getCoupons = async (req, res) => {
     try {
-        const { restaurantId } = req.user;
-        if (!restaurantId) return res.status(403).json({ success: false, message: "No restaurant assigned" });
-
-        const coupons = await couponModel.find({ restaurantId });
+        const restaurantId = req.user?.restaurantId || req.body?.restaurantId || req.user?._id || null;
+        const query = restaurantId ? { restaurantId } : {};
+        const coupons = await couponModel.find(query);
         res.json({ success: true, data: coupons });
     } catch (error) {
         console.error(error);
@@ -53,10 +55,11 @@ const getCoupons = async (req, res) => {
 // Delete a coupon
 const deleteCoupon = async (req, res) => {
     try {
-        const { restaurantId } = req.user;
+        const restaurantId = req.user?.restaurantId || req.body?.restaurantId || req.user?._id || null;
         const { id } = req.params;
 
-        const coupon = await couponModel.findOneAndDelete({ _id: id, restaurantId });
+        const filter = restaurantId ? { _id: id, restaurantId } : { _id: id };
+        const coupon = await couponModel.findOneAndDelete(filter);
         if (!coupon) return res.status(404).json({ success: false, message: "Coupon not found" });
 
         res.json({ success: true, message: "Coupon deleted successfully" });

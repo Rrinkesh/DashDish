@@ -85,9 +85,14 @@ const StoreContextProvider = (props) => {
         deliveryfee
     }
     const fetchFoodList = async () => {
-        const response = await axios.get(url + "/api/food/list");
-        setFoodList(response.data.data);
-        setfood_list(response.data.data);
+        try {
+            const response = await axios.get(url + "/api/food/list");
+            const foods = response?.data?.data || [];
+            setfood_list(foods);
+        } catch (error) {
+            console.error("Failed to fetch food list", error);
+            setfood_list([]);
+        }
     }
     const fetchmenulist = async () => {
         const response = await axios.get(url + "/api/menu/list")

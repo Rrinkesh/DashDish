@@ -4,7 +4,7 @@ const behaviorModel = require('../models/behaviorModel');
 // Get home page personalized recommendations
 const getPersonalized = async (req, res) => {
     try {
-        const userId = req.body.userid; // Note: authmiddleware usually puts it in req.body.userid
+        const userId = req?.body?.userid || req?.headers?.userid || req?.query?.userid;
         const recommendations = await getPersonalizedRecommendations(userId);
         res.json({ success: true, ...recommendations });
     } catch (error) {
@@ -16,7 +16,7 @@ const getPersonalized = async (req, res) => {
 // Get frequently bought together for cart/checkout
 const getCartSuggestions = async (req, res) => {
     try {
-        const { cartFoodIds } = req.body;
+        const { cartFoodIds } = req.body || {};
         const suggestions = await getFrequentlyBoughtTogether(cartFoodIds);
         res.json({ success: true, data: suggestions });
     } catch (error) {
@@ -28,8 +28,8 @@ const getCartSuggestions = async (req, res) => {
 // Log user behavior
 const logBehavior = async (req, res) => {
     try {
-        const userId = req.body.userid; // from authmiddleware
-        const { action, foodId, metadata } = req.body;
+        const userId = req?.body?.userid || req?.headers?.userid || req?.query?.userid;
+        const { action, foodId, metadata } = req.body || {};
 
         if (!action) return res.json({ success: false, message: "Action is required" });
 

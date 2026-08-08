@@ -1,6 +1,6 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
-const orderModel = require('../models/orderModel');
+const orderModel = require('../models/ordermodel');
 const paymentModel = require('../models/paymentModel');
 const { getIo } = require('../socket/socketHandler');
 

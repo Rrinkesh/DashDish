@@ -1,6 +1,6 @@
 const express = require('express');
 const { getPersonalized, getCartSuggestions, logBehavior } = require('../controllers/recommendationController');
-const authmiddleware = require('../middleware/auth'); // assuming it exists
+const { authmiddleware } = require('../middleware/auth'); // assuming it exists
 
 const recommendationRouter = express.Router();
 

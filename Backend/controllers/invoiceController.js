@@ -1,5 +1,5 @@
 const invoiceModel = require('../models/invoiceModel');
-const orderModel = require('../models/orderModel');
+const orderModel = require('../models/ordermodel');
 const restaurantModel = require('../models/restaurantModel');
 const usermodel = require('../models/usermodel');
 const PDFDocument = require('pdfkit');

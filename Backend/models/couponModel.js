@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const couponSchema = new mongoose.Schema({
     code: { type: String, required: true, uppercase: true, unique: true },
-    restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: 'restaurant', required: true }, // Owner creates coupons
+    restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: 'restaurant', default: null }, // Owner creates coupons; optional for admin fallback
     discountType: { type: String, enum: ['PERCENTAGE', 'FLAT'], default: 'PERCENTAGE' },
     discountValue: { type: Number, required: true }, // % or flat amount
     minOrderAmount: { type: Number, default: 0 },

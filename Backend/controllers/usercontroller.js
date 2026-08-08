@@ -2,8 +2,7 @@ const usermodel =require('../models/usermodel');
 const jwt =require('jsonwebtoken')
 const bcrypt =require('bcrypt');
 const validator =require('validator');
-const nodemailer = require('nodemailer');
-const twilio = require('twilio');
+const { sendOtpEmail } = require('../services/emailService');
 
 //login user...
 const loginuser =async (req,res)=>{
@@ -61,6 +60,7 @@ const createtoken =(id)=>{
 //signup user...
 const registeruser =async(req,res)=>{
 const {name,password,email,phone}=req.body;
+let emailResult = { success: false, message: "OTP created successfully. Email delivery is currently unavailable; please contact support if you do not receive it." };
 try{
 const exists =await usermodel.findOne({email});
 if(exists){
@@ -70,7 +70,7 @@ if(exists){
     })  
 }
 if(!validator.isEmail(email)){
-    res.json({success:false,
+    return res.json({success:false,
         message:"plz enter valid email"})
 }
 if(password.length<8){
@@ -100,47 +100,21 @@ console.log(`[MOCK EMAIL & SMS] Sending OTP ${otp} to email: ${email} and phone:
 
 try {
     // Send Email
-    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
-        });
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Your Verification OTP',
-            text: `Your OTP for registration is ${otp}. It is valid for 10 minutes.`
-        };
-        await transporter.sendMail(mailOptions);
+    const emailResult = await sendOtpEmail({ to: email, otp });
+    if (emailResult.success) {
         console.log("OTP sent via email");
     } else {
-        console.log("Email credentials not found in .env, skipping real email send.");
-    }
-
-    // Send SMS
-    if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN && process.env.TWILIO_PHONE_NUMBER) {
-        const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-        await client.messages.create({
-            body: `Your verification OTP is ${otp}. Valid for 10 minutes.`,
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: phone.startsWith('+') ? phone : `+91${phone}` // Assuming India country code if not provided, you may need to adjust
-        });
-        console.log("OTP sent via SMS");
-    } else {
-        console.log("Twilio credentials not found in .env, skipping real SMS send.");
+        console.warn("Email delivery failed:", emailResult.message);
     }
 
 } catch (sendError) {
-    console.error("Error sending OTP via email/sms:", sendError);
+    console.error("Error sending OTP via email:", sendError);
     // Even if sending fails (e.g. invalid phone number), we might still want to proceed or return an error. 
     // We will proceed for now so they aren't blocked entirely.
 }
 
 res.json({success:true,
-    message: "OTP sent to your email and phone",
+    message: emailResult?.success ? "OTP sent to your email" : "OTP created successfully. Email delivery is currently unavailable; please contact support if you do not receive it.",
     otpRequired: true
 })
 

@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-content-left">
             <img src={assets.logo} alt=""  width={100}/>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, dolore. Libero exercitationem aliquid accusamus debitis. Perferendis expedita, blanditiis ut minus odit deleniti cum voluptate sint temporibus quisquam maxime eos. Nihil corporis alias ex magnam. Officiis eum repudiandae non? Neque, exercitationem!</p>
+            <p>Welcome to DashDish, your favorite destination for quick, hot, and delicious meals delivered right to your doorstep. We partner with the best chefs to ensure every bite is an experience. Taste the difference today!</p>
 
         </div>
          <div className="footer-content-center">
@@ -23,14 +23,14 @@ const Footer = () => {
             <h2>GET IN TOUCH</h2>
             <ul>
             <li>9027348898</li>
-            <li>tomato@gmail.com</li>
+            <li>rinkeshbhati567@gmail.com</li>
             </ul>
         </div>
 
       </div>
       <hr />
       <p className="footercopyright">
-        Copyright 2024@ Tomato.com -All Rights are reserved
+        Copyright 2024@ DashDish.com - All Rights reserved
       </p>
     </div>
   )

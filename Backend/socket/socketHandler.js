@@ -14,26 +14,30 @@ const initSocket = (server) => {
 
     // Middleware for Socket Authentication
     io.use((socket, next) => {
-        const token = socket.handshake.auth.token;
-        const role = socket.handshake.auth.role; // e.g. "admin", "display", or "customer"
+        const token = socket.handshake.auth?.token;
+        const role = socket.handshake.auth?.role || 'customer';
 
         if (role === 'display') {
-            // Display screen might not be authenticated strictly, or can have a special display token
             socket.role = 'display';
+            socket.userId = null;
             return next();
         }
 
         if (!token) {
-            return next(new Error("Authentication error: No token provided"));
+            socket.role = role;
+            socket.userId = null;
+            return next();
         }
 
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             socket.userId = decoded.id;
-            socket.role = role || 'customer'; // Default to customer if not specified
+            socket.role = role;
             next();
         } catch (err) {
-            return next(new Error("Authentication error: Invalid token"));
+            socket.role = role;
+            socket.userId = null;
+            next();
         }
     });
 
