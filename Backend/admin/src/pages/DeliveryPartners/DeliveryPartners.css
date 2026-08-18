@@ -1,156 +1,811 @@
+/* ==============================
+   DELIVERY PARTNERS PAGE
+================================ */
+
+
 .delivery-partners {
-    padding: 20px;
-    width: 100%;
+
+    width:100%;
+
+    padding:30px;
+
+    background:#f8fafc;
+
+    min-height:100vh;
+
+    box-sizing:border-box;
+
 }
 
-.filters {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+
+
+/* ==============================
+   HEADER
+================================ */
+
+
+.header-actions {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
 }
 
-.filters input, .filters select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline-color: tomato;
+
+
+.header-actions h2 {
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:#1e293b;
+
 }
 
-.filters input {
-    flex: 1;
-    max-width: 300px;
-}
+
+
+/* ADD BUTTON */
+
 
 .add-btn {
-    padding: 10px 20px;
-    background: tomato;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+
+    padding:14px 25px;
+
+
+    border:none;
+
+
+    border-radius:14px;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #6366f1,
+
+        #8b5cf6
+
+    );
+
+
+    color:white;
+
+
+    font-weight:700;
+
+
+    font-size:15px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
 }
+
+
+
+.add-btn:hover {
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+
+    0 10px 25px rgba(99,102,241,.35);
+
+
+}
+
+
+
+
+
+/* ==============================
+   FILTERS
+================================ */
+
+
+.filters {
+
+
+    background:white;
+
+
+    padding:20px;
+
+
+    border-radius:18px;
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    margin-bottom:30px;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(0,0,0,.06);
+
+
+}
+
+
+
+.filters input,
+.filters select {
+
+
+    padding:13px 15px;
+
+
+    border-radius:12px;
+
+
+    border:1px solid #cbd5e1;
+
+
+    outline:none;
+
+
+    font-size:15px;
+
+
+}
+
+
+
+.filters input {
+
+
+    flex:1;
+
+
+}
+
+
+
+.filters input:focus,
+.filters select:focus {
+
+
+    border-color:#6366f1;
+
+
+    box-shadow:
+
+    0 0 0 4px rgba(99,102,241,.15);
+
+
+}
+
+
+
+
+
+/* ==============================
+   PARTNER GRID
+================================ */
+
 
 .partners-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+
+    gap:25px;
+
+
 }
+
+
+
+
+/* ==============================
+   PARTNER CARD
+================================ */
+
 
 .partner-card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: 0.3s;
+
+
+    background:white;
+
+
+    border-radius:22px;
+
+
+    padding:25px;
+
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,.08);
+
+
+    border:1px solid #e2e8f0;
+
+
+    transition:.3s;
+
+
 }
+
+
+
+.partner-card:hover {
+
+
+    transform:translateY(-5px);
+
+
+    box-shadow:
+
+    0 15px 35px rgba(99,102,241,.15);
+
+
+}
+
+
 
 .partner-card.inactive {
-    opacity: 0.6;
+
+
+    opacity:.7;
+
+
 }
+
+
+
+
+/* CARD HEADER */
+
 
 .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:flex-start;
+
+
+    margin-bottom:20px;
+
+
 }
+
+
 
 .driver-info h3 {
-    margin: 0 0 5px 0;
+
+
+    font-size:20px;
+
+
+    color:#1e293b;
+
+
+    margin-bottom:5px;
+
+
 }
+
+
+
 .driver-info p {
-    margin: 0;
-    color: #666;
-    font-size: 0.9rem;
+
+
+    color:#64748b;
+
+
+    font-size:14px;
+
+
 }
+
+
+
+/* ==============================
+   STATUS
+================================ */
+
+
+.status-badge {
+
+
+    padding:7px 14px;
+
+
+    border-radius:20px;
+
+
+    font-size:12px;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+.status-badge.online {
+
+
+    background:#dcfce7;
+
+
+    color:#15803d;
+
+
+}
+
+
+
+.status-badge.busy {
+
+
+    background:#ffedd5;
+
+
+    color:#c2410c;
+
+
+}
+
+
+
+.status-badge.offline {
+
+
+    background:#fee2e2;
+
+
+    color:#dc2626;
+
+
+}
+
+
+
+
+
+/* ==============================
+   CARD BODY
+================================ */
+
+
+.card-body {
+
+
+    background:#f8fafc;
+
+
+    padding:18px;
+
+
+    border-radius:15px;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
 
 .card-body p {
-    margin: 8px 0;
-    color: #444;
+
+
+    margin:10px 0;
+
+
+    color:#475569;
+
+
+    font-size:14px;
+
+
 }
 
-.card-actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
+
+
+.card-body strong {
+
+
+    color:#1e293b;
+
+
 }
 
-.toggle-btn {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
+
+
+
+/* ==============================
+   ACTION
+================================ */
+
+
+.card-actions button {
+
+
+    width:100%;
+
+
+    padding:13px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
 }
-.toggle-btn.deactivate {
-    background: #ffeaa7;
-    color: #d63031;
-}
+
+
+
 .toggle-btn.activate {
-    background: #55efc4;
-    color: #00b894;
+
+
+    background:#dcfce7;
+
+
+    color:#15803d;
+
+
 }
 
-/* Modal */
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+
+
+.toggle-btn.deactivate {
+
+
+    background:#fee2e2;
+
+
+    color:#dc2626;
+
+
 }
+
+
+
+.toggle-btn:hover {
+
+
+    transform:translateY(-2px);
+
+
+}
+
+
+
+
+
+/* ==============================
+   MODAL
+================================ */
+
+
+.modal-overlay {
+
+
+    position:fixed;
+
+
+    inset:0;
+
+
+    background:rgba(15,23,42,.55);
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    z-index:1000;
+
+
+}
+
+
 
 .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 90%;
+
+
+    width:450px;
+
+
+    max-width:90%;
+
+
+    background:white;
+
+
+    padding:30px;
+
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.25);
+
+
 }
+
+
 
 .modal-content h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
+
+
+    font-size:24px;
+
+
+    color:#1e293b;
+
+
+    margin-bottom:25px;
+
+
 }
+
+
 
 .modal-content form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:15px;
+
+
 }
 
-.modal-content input, .modal-content select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline-color: tomato;
+
+
+.modal-content input,
+.modal-content select {
+
+
+    padding:13px 15px;
+
+
+    border-radius:12px;
+
+
+    border:1px solid #cbd5e1;
+
+
+    outline:none;
+
+
+    font-size:15px;
+
+
 }
+
+
+
+.modal-content input:focus,
+.modal-content select:focus {
+
+
+    border-color:#6366f1;
+
+
+}
+
+
+
+
+
+/* MODAL BUTTONS */
+
 
 .modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
+
+
+    display:flex;
+
+
+    justify-content:flex-end;
+
+
+    gap:15px;
+
+
+    margin-top:15px;
+
+
 }
 
-.modal-actions button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
+
 
 .cancel-btn {
-    background: #f1f2f6;
-    color: #576574;
+
+
+    padding:12px 22px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    background:#e2e8f0;
+
+
+    color:#334155;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
 }
+
+
+
 .save-btn {
-    background: tomato;
-    color: white;
+
+
+    padding:12px 25px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    background:#6366f1;
+
+
+    color:white;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+.save-btn:hover {
+
+
+    background:#4f46e5;
+
+
+}
+
+
+
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+
+@media(max-width:1200px){
+
+
+    .partners-grid {
+
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+
+    }
+
+
+}
+
+
+
+@media(max-width:800px){
+
+
+    .delivery-partners {
+
+
+        padding:15px;
+
+
+    }
+
+
+
+    .header-actions {
+
+
+        flex-direction:column;
+
+
+        align-items:flex-start;
+
+
+        gap:15px;
+
+
+    }
+
+
+
+    .filters {
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .partners-grid {
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
 }

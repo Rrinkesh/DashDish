@@ -3,8 +3,6 @@ const ordermodel = require('../models/ordermodel');
 const inventoryModel = require('../models/inventoryModel');
 const wasteModel = require('../models/wasteModel');
 
-const apiKey = process.env.GEMINI_API_KEY || "YOUR_API_KEY_HERE";
-const genAI = new GoogleGenerativeAI(apiKey);
 
 // Helper to fetch and aggregate data
 const getBusinessContext = async () => {
@@ -55,8 +53,63 @@ const getBusinessContext = async () => {
     };
 };
 
+const formatHistoryForGemini = (chatHistory) => {
+    const history = [];
+    if (!Array.isArray(chatHistory)) return history;
+
+    for (const msg of chatHistory) {
+        const textContent = (msg.fullText || msg.text || "").trim();
+        if (!textContent) continue;
+
+        const role = msg.sender === 'user' ? 'user' : 'model';
+
+        if (history.length === 0) {
+            if (role === 'user') {
+                history.push({ role: 'user', parts: [{ text: textContent }] });
+            }
+        } else {
+            const lastRole = history[history.length - 1].role;
+            if (role !== lastRole) {
+                history.push({ role, parts: [{ text: textContent }] });
+            } else {
+                history[history.length - 1].parts[0].text += "\n" + textContent;
+            }
+        }
+    }
+
+    // startChat history must end with a 'model' role so sendMessage(userPrompt) appends a 'user' turn cleanly
+    if (history.length > 0 && history[history.length - 1].role === 'user') {
+        history.pop();
+    }
+
+    return history;
+};
+
+// Retry helper with exponential backoff for Gemini overload (503) errors
+const withRetry = async (fn, retries = 3, delayMs = 1500) => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            return await fn();
+        } catch (err) {
+            const isOverloaded =
+                err?.message?.toLowerCase().includes("overloaded") ||
+                err?.message?.toLowerCase().includes("503") ||
+                err?.status === 503;
+
+            if (isOverloaded && attempt < retries) {
+                console.warn(`Gemini overloaded, retrying in ${delayMs * attempt}ms (attempt ${attempt}/${retries})...`);
+                await new Promise(r => setTimeout(r, delayMs * attempt));
+            } else {
+                throw err;
+            }
+        }
+    }
+};
+
 const generateBusinessInsight = async (userPrompt, chatHistory = []) => {
     try {
+        const key = process.env.GEMINI_API_KEY || process.env.Gemini_Key || "YOUR_API_KEY_HERE";
+        const genAI = new GoogleGenerativeAI(key);
         const metrics = await getBusinessContext();
         
         const systemInstruction = `
@@ -77,12 +130,8 @@ INVENTORY ALERTS:
 - Total Waste Cost: ₹${metrics.totalWasteCost}
 `;
 
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
-        
-        const formattedHistory = chatHistory.map(msg => ({
-            role: msg.sender === 'user' ? 'user' : 'model',
-            parts: [{ text: msg.text }]
-        }));
+        const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
+        const formattedHistory = formatHistoryForGemini(chatHistory);
 
         const chat = model.startChat({
             history: [
@@ -93,19 +142,28 @@ INVENTORY ALERTS:
             generationConfig: { temperature: 0.3 }
         });
 
-        const result = await chat.sendMessage(userPrompt);
+        const result = await withRetry(() => chat.sendMessage(userPrompt));
         return result.response.text();
     } catch (error) {
-        if (apiKey === "YOUR_API_KEY_HERE" || !process.env.GEMINI_API_KEY) {
-            return "I'm currently running in offline demo mode since no GEMINI_API_KEY was provided in your environment variables. In production, I would use advanced AI to analyze your sales and provide actionable business insights.";
+        console.error("AI Analytics Error:", error?.message || error);
+        if (error?.message?.toLowerCase().includes("overloaded") || error?.status === 503) {
+            return "The AI is experiencing high traffic right now. Please try again in a few seconds!";
         }
-        console.error("AI Analytics Error:", error);
-        throw new Error("Failed to generate AI analytics response.");
+        const key = process.env.GEMINI_API_KEY || process.env.Gemini_Key;
+        if (!key || key === "YOUR_API_KEY_HERE") {
+            return "I'm currently running in offline demo mode since no GEMINI_API_KEY was provided in your environment variables.";
+        }
+        return "I'm having trouble generating a response right now. Please try again.";
     }
 };
 
 const generateForecast = async () => {
     try {
+        const key = process.env.GEMINI_API_KEY || process.env.Gemini_Key || "YOUR_API_KEY_HERE";
+        if (!key || key === "YOUR_API_KEY_HERE") {
+            return "1. Demand Forecast: Moderate based on average weekday trends.\n2. Prep items: Focus on best sellers listed above.\n3. Optimization: Consider running a promotion on slow-moving inventory to reduce waste.\n(Note: Generated via offline mock mode due to missing API key).";
+        }
+        const genAI = new GoogleGenerativeAI(key);
         const metrics = await getBusinessContext();
         const prompt = `Based on the following data from the last 7 days:
 Revenue: ₹${metrics.totalRevenue}, Orders: ${metrics.totalOrders}, Best Sellers: ${metrics.bestSellers.join(", ")}.
@@ -115,15 +173,15 @@ Please provide a brief 3-point forecast for tomorrow:
 3. One menu optimization suggestion (e.g. promoting a worst seller or removing it).
 Keep it under 4 sentences total.`;
         
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
-        const result = await model.generateContent(prompt);
+        const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
+        const result = await withRetry(() => model.generateContent(prompt));
         return result.response.text();
     } catch (error) {
-        if (apiKey === "YOUR_API_KEY_HERE" || !process.env.GEMINI_API_KEY) {
-            return "1. Demand Forecast: Moderate based on average weekday trends.\n2. Prep items: Focus on best sellers listed above.\n3. Optimization: Consider running a promotion on slow-moving inventory to reduce waste.\n(Note: Generated via offline mock mode due to missing API key).";
+        console.error("Forecast Error:", error?.message || error);
+        if (error?.message?.toLowerCase().includes("overloaded") || error?.status === 503) {
+            return "The AI forecast service is experiencing high traffic. Please refresh the page in a few seconds.";
         }
-        console.error("Forecast Error:", error);
-        return "Unable to generate forecast at this time. Please check your API key or try again later.";
+        return "Unable to generate forecast at this time. Please try again later.";
     }
 };
 

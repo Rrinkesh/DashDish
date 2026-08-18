@@ -1,3 +1,141 @@
 [2026-08-06T16:27:40.308Z] USER: hii
 [2026-08-06T16:27:41.948Z] AI: I'm currently running in offline demo mode since no GEMINI_API_KEY was provided! In a production environment, I would analyze the live menu and recommend the best dishes for you based on your preferences.
 
+[2026-08-10T07:15:17.116Z] USER: ok
+[2026-08-10T07:15:18.722Z] AI: I'm currently running in offline demo mode since no GEMINI_API_KEY was provided! In a production environment, I would analyze the live menu and recommend the best dishes for you based on your preferences.
+
+[2026-08-17T16:50:33.032Z] USER: hii
+[2026-08-17T16:55:20.222Z] USER: hii
+[2026-08-17T16:55:25.506Z] AI: Hello there! Welcome to DashDish! 🍽️ I'm super excited to help you order something delicious today. 
+
+Here is our live menu:
+* **Soup** - ₹20
+  * *This is a famous soup from Delhi!*
+* **Ok** - ₹20
+  * *Delicious onion specialty.*
+
+How can I help you today? Do you have a specific budget in mind, or would you like a recommendation?
+
+[2026-08-17T16:55:38.867Z] USER: can u suggest me food 
+[2026-08-17T16:55:42.353Z] AI: Hello! I would love to help you with that! Here are the delicious options available on our menu today:
+
+* **Soup** - ₹20
+  * *Famous soup from Delhi!*
+* **OK** - ₹20
+  * *A savory onion delight!*
+
+Which one would you like to order, or do you have a specific budget in mind?
+
+[2026-08-17T16:55:56.893Z] USER: suggest me food item
+[2026-08-17T16:56:03.642Z] AI: Hello! I'd love to help you pick something delicious today! Here are the items available on our menu:
+
+* **Soup** - ₹20
+  * *Famous Delhi-style soup!*
+* **Ok** - ₹20
+  * *Onion special item*
+
+Let me know if you have a specific budget in mind or which one you'd like to try!
+
+[2026-08-17T17:08:23.565Z] USER: hii
+[2026-08-17T17:09:09.711Z] USER: what error
+[2026-08-17T17:20:48.590Z] USER: hii
+[2026-08-17T17:20:53.667Z] AI: Hello there! Welcome to DashDish! 🍽️✨ 
+
+I'm super excited to help you order some delicious food today! Here is what we have fresh and available on our menu right now:
+
+* **Soup** - ₹20  
+  *(Category: Soups) - Famous soup from Delhi!*
+* **Ok** - ₹20  
+  *(Category: Onion) - Tasty & delicious!*
+
+How can I help you build your order today? Let me know if you have a specific budget in mind! 😊
+
+[2026-08-17T17:21:14.796Z] USER: items in menu
+[2026-08-17T17:24:26.562Z] USER: hlo
+[2026-08-17T17:41:05.135Z] USER: suggest food item
+[2026-08-17T17:49:41.516Z] USER: hii
+[2026-08-17T17:49:42.546Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-17T17:49:47.716Z] USER: ok
+[2026-08-17T17:49:48.586Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-17T18:02:41.726Z] USER: hii
+[2026-08-17T18:02:43.681Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-18T02:34:30.035Z] USER: hii
+[2026-08-18T02:34:34.393Z] AI: Hey there! 👋 Welcome to DashDish! I'm your DashDish AI assistant, super excited to help you pick out something tasty today!
+
+Here is what we have fresh and available on our menu right now:
+
+* **Soup** - ₹20
+  *(Famous Delhi soup)*
+* **ok** - ₹20
+  *(Onion specialty)*
+
+How can I help you build your order today? Let me know if you have a specific budget in mind! 😊
+
+[2026-08-18T02:34:48.257Z] USER: give me menu 
+[2026-08-18T02:34:48.903Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-18T02:34:56.387Z] USER: menu items
+[2026-08-18T02:34:56.957Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-18T02:34:59.563Z] USER: hii
+[2026-08-18T02:34:59.760Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-18T02:35:11.437Z] USER: menu
+[2026-08-18T02:35:12.090Z] AI: I'm having trouble connecting right now. Please try again in a moment!
+
+[2026-08-18T13:50:41.686Z] USER: give me menu list
+[2026-08-18T13:50:46.584Z] AI: Hello! Welcome to DashDish! 🎉 Here is our live menu:
+
+* **soup** — ₹20  
+  *Category:* Soups  
+  *Description:* This is soup famous of delhi  
+
+* **ok** — ₹20  
+  *Category:* Onion  
+  *Description:* okok  
+
+Let me know what you'd like to order, or tell me your budget and I'll help you assemble a great meal! 🍲✨
+
+[2026-08-18T13:50:54.129Z] USER: hi
+[2026-08-18T13:51:23.410Z] AI: Hi there! 👋 Welcome to DashDish! 🎉
+
+I'm super excited to help you pick out something delicious today! Whether you're looking for a quick bite or trying to build a meal within a budget, I'm here to help. 
+
+How can I assist you today?
+
+[2026-08-18T13:51:36.481Z] USER: give me menu list 
+[2026-08-18T13:53:30.968Z] AI: Here is our current menu list! 🍲✨
+
+* **soup** — ₹20
+  * **Category:** Soups
+  * **Description:** This is soup famous of delhi
+* **ok** — ₹20
+  * **Category:** Onion
+  * **Description:** okok
+
+Let me know what you'd like to order, or give me a budget and I can help you put together a tasty combination! 😊
+
+[2026-08-18T13:54:01.618Z] USER: what is in food 
+[2026-08-18T13:54:39.924Z] AI: Here are the delicious options we have available right now! 😋✨
+
+* **soup** (₹20) — A famous, warm, and comforting Delhi-style soup! 🥣
+* **ok** (₹20) — A tasty onion category dish! 🧅
+
+Which one would you like to try today, or would you like to get both for just ₹40? Let me know! 🎉
+
+[2026-08-18T13:54:51.250Z] USER: hii
+[2026-08-18T13:55:31.317Z] AI: Hello again! 👋 Welcome back to DashDish! 🎉
+
+How can I help you today? Would you like to check out our delicious menu options, or do you have a specific budget in mind that I can help you with? 🍲✨
+
+[2026-08-18T17:08:31.062Z] USER: how to login
+[2026-08-18T17:09:19.574Z] AI: Hello there! Logging into DashDish is super easy! Just follow these quick steps:
+
+* Click on the **Login / Sign Up** button at the top right corner of the page/app.
+* Enter your registered **Mobile Number** or **Email Address**.
+* Enter the **OTP** (One-Time Password) sent to your phone or email.
+* Click **Verify & Proceed**, and you're all set
+

@@ -1,85 +1,435 @@
-.exploremenu{
+/* =========================================
+   EXPLORE MENU
+========================================= */
+
+.exploremenu {
+    position: relative;
+
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px 0;
-}
-.exploremenu h1{
-    color: var(--dominos-blue);
-    font-weight: 700;
-}
-.explore-menu-text{
-    max-width: 60%;
-    color: var(--text-dark);
-    line-height: 1.5;
+
+    gap: 18px;
+
+    padding: 45px 0 25px;
+
+    overflow: hidden;
 }
 
-.explore-menu-list{
+
+/* =========================================
+   HEADING
+========================================= */
+
+.exploremenu h1 {
     display: flex;
-    justify-content: flex-start;
+
     align-items: center;
-    text-align: center;
-    gap: 40px;
-    margin: 20px 0px;
-    overflow-x: auto;
-    padding: 20px 0;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+
+    gap: 12px;
+
+    margin: 0;
+
+    color: var(--text-dark);
+
+    font-size:
+        clamp(26px, 3vw, 36px);
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
 }
-.explore-menu-list::-webkit-scrollbar{
+
+
+/* Heading accent */
+
+.exploremenu h1::before {
+    content: "";
+
+    width: 6px;
+    height: 32px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--dominos-blue),
+            var(--dominos-red)
+        );
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.explore-menu-text {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: var(--text-muted);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   CATEGORY LIST
+========================================= */
+
+.explore-menu-list {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 28px;
+
+    margin: 18px 0 5px;
+
+    padding: 12px 8px 20px;
+
+    overflow-x: auto;
+
+    scroll-behavior: smooth;
+
+    scroll-snap-type: x mandatory;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+}
+
+
+.explore-menu-list::-webkit-scrollbar {
     display: none;
 }
+
+
+/* =========================================
+   CATEGORY ITEM
+========================================= */
+
 .explore-menu-list-item {
-    scroll-snap-align: start;
+    position: relative;
+
+    flex: 0 0 auto;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
-    gap: 10px;
-}
-.explore-menu-list-item img{
-    width: 7.5vw;
-    height: 7.5vw;
-    min-width: 80px;
-    min-height: 80px;
-    object-fit: cover;
+
+    gap: 12px;
+
+    min-width: 105px;
+
+    padding: 8px 8px 12px;
+
+    border-radius: 18px;
+
+    scroll-snap-align: start;
+
     cursor: pointer;
-    border-radius: 50%;
-    transition: var(--standard-transition);
-    box-shadow: var(--dominos-shadow);
-}
-.explore-menu-list-item img:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-.explore-menu-list-item p{
-    margin-top: 5px;
-    color: var(--text-dark);
-    font-size: max(1.4vw,16px);
-    cursor: pointer;
-    font-weight: 600;
-    transition: color 0.2s;
-    text-transform: capitalize;
-}
-.explore-menu-list-item:hover p {
-    color: var(--dominos-red);
-}
-.exploremenu hr{
-    margin: 20px 0px;
-    height: 1px;
-    background: var(--border-color);
-    border: none;
-}
-.explore-menu-list-item img.active{
-    border: 4px solid var(--dominos-red);
-    padding: 2px;
-    transform: none;
-    box-shadow: none;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
 }
 
-@media (max-width:1050px){
-      .explore-menu-text{
-            max-width: 100%;
-            font-size: 14px;
-      }
+
+/* Hover category */
+
+.explore-menu-list-item:hover {
+    transform: translateY(-6px);
+
+    background:
+        rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================================
+   CATEGORY IMAGE
+========================================= */
+
+.explore-menu-list-item img {
+    width: clamp(82px, 8vw, 115px);
+
+    height: clamp(82px, 8vw, 115px);
+
+    min-width: 82px;
+    min-height: 82px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    padding: 3px;
+
+    background: white;
+
+    border:
+        2px solid rgba(20, 35, 60, 0.07);
+
+    box-shadow:
+        0 8px 22px rgba(20, 35, 60, 0.09);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 0.4s ease,
+        border-color 0.3s ease;
+}
+
+
+/* Image hover */
+
+.explore-menu-list-item:hover img {
+    transform: scale(1.07);
+
+    border-color:
+        rgba(0, 85, 165, 0.25);
+
+    box-shadow:
+        0 14px 30px rgba(20, 35, 60, 0.15);
+}
+
+
+/* =========================================
+   CATEGORY NAME
+========================================= */
+
+.explore-menu-list-item p {
+    margin: 0;
+
+    color: var(--text-dark);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.explore-menu-list-item:hover p {
+    color: var(--dominos-blue);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   ACTIVE CATEGORY
+========================================= */
+
+.explore-menu-list-item.active img {
+    border:
+        4px solid var(--dominos-red);
+
+    padding: 3px;
+
+    box-shadow:
+        0 0 0 5px rgba(227, 24, 55, 0.08),
+        0 12px 25px rgba(227, 24, 55, 0.18);
+}
+
+
+.explore-menu-list-item.active p {
+    color: var(--dominos-red);
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   ACTIVE DOT
+========================================= */
+
+.explore-menu-list-item.active::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--dominos-red);
+
+    box-shadow:
+        0 0 0 5px rgba(227, 24, 55, 0.08);
+}
+
+
+/* =========================================
+   SUBTLE SIDE GLOW
+========================================= */
+
+.exploremenu::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -130px;
+    top: 20px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 85, 165, 0.055),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.exploremenu hr {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 18px 0 0;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--border-color),
+            transparent
+        );
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+
+    .exploremenu {
+        padding-top: 35px;
+    }
+
+    .explore-menu-text {
+        max-width: 100%;
+
+        font-size: 14px;
+    }
+
+    .explore-menu-list {
+        gap: 22px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .exploremenu {
+        padding:
+            30px 0 20px;
+
+        gap: 14px;
+    }
+
+    .exploremenu h1 {
+        font-size: 25px;
+    }
+
+    .exploremenu h1::before {
+        width: 5px;
+        height: 26px;
+    }
+
+    .explore-menu-text {
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+    .explore-menu-list {
+        gap: 18px;
+
+        margin-top: 12px;
+
+        padding:
+            10px 5px 18px;
+    }
+
+    .explore-menu-list-item {
+        min-width: 90px;
+
+        padding:
+            5px 5px 10px;
+    }
+
+    .explore-menu-list-item img {
+        width: 78px;
+        height: 78px;
+
+        min-width: 78px;
+        min-height: 78px;
+    }
+
+    .explore-menu-list-item p {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .explore-menu-list {
+        gap: 14px;
+    }
+
+    .explore-menu-list-item {
+        min-width: 82px;
+    }
+
+    .explore-menu-list-item img {
+        width: 70px;
+        height: 70px;
+
+        min-width: 70px;
+        min-height: 70px;
+    }
+
 }

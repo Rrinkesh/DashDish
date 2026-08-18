@@ -36,7 +36,8 @@ hr{
 }
 .app-content{
   display: flex;
-  
+  min-height: 100vh;
+  align-items: stretch;
 }
 .flex-col{
   display: flex;flex-direction: column;

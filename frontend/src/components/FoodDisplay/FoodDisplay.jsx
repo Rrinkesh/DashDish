@@ -34,7 +34,9 @@ const FoodDisplay = ({ category, topRated = false, searchTerm = "", minRating = 
 
   return (
     <div className='food-display' id='food-display'>
-      <h2>{topRated ? 'Top 5 Rated Dishes' : 'Top dishes near u'}</h2>
+      <h2>
+    {topRated ? '⭐ Top Rated Dishes' : '🔥 Popular Near You'}
+</h2>
       
       {displayList.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '50px 20px', color: 'var(--text-muted)' }}>

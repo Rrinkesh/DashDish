@@ -18,28 +18,34 @@ import 'react-toastify/dist/ReactToastify.css'
 import AIChatWidget from './components/AIChatWidget/AIChatWidget'
 
 const App = () => {
-  const  [showlogin,setshowlogin] =useState(false);
+  const [showlogin, setshowlogin] = useState(false);
+
   return (
     <>
-    <ToastContainer />
-    {showlogin?<Loginpop setshowlogin={setshowlogin} />:<></>}
-    <div className='app'>
+      <ToastContainer />
+      {showlogin ? <Loginpop setshowlogin={setshowlogin} /> : null}
+
+      {/* 1. Navbar moved outside .app to span the full screen */}
       <Navbar setshowlogin={setshowlogin} />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/cart' element={<Cart />}></Route>
-        <Route path='/order' element={<Placeorder />}></Route>
-        <Route path='/Verify' element={<Verify />}></Route> 
-        <Route path='/myorders' element ={<MyOrders />} ></Route>
-        <Route path='/tracking/:orderId' element={<Tracking />} />
-        <Route path='/welcome' element={<Welcome />} ></Route>
-        <Route path='/food/:id' element={<FoodDetailsPage />} ></Route>
-        <Route path='/category/:categoryName' element={<CategoryPage />} ></Route>
-        <Route path='/myprofile' element={<MyProfile />} ></Route>
-      </Routes>
-      <AIChatWidget />
-    </div>
-    <Footer/>
+
+      {/* 2. Main content container */}
+      <div className='app'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/order' element={<Placeorder />} />
+          <Route path='/Verify' element={<Verify />} />
+          <Route path='/myorders' element={<MyOrders />} />
+          <Route path='/tracking/:orderId' element={<Tracking />} />
+          <Route path='/welcome' element={<Welcome />} />
+          <Route path='/food/:id' element={<FoodDetailsPage />} />
+          <Route path='/category/:categoryName' element={<CategoryPage />} />
+          <Route path='/myprofile' element={<MyProfile />} />
+        </Routes>
+        <AIChatWidget />
+      </div>
+
+      <Footer />
     </>
   )
 }

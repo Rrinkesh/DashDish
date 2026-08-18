@@ -56,7 +56,7 @@ const orderschema =new mongoose.Schema({
             lng: { type: Number, default: 0 }
         },
         estimatedArrival: { type: Date, default: null },
-        paymentMethod: { type: String, enum: ['Card', 'UPI', 'NetBanking', 'Wallet', 'COD', 'PayAtPickup', 'PayAtRestaurant', 'Stripe'], default: 'Stripe' },
+        paymentMethod: { type: String, enum: ['Card', 'UPI', 'NetBanking', 'Wallet', 'COD', 'PayAtPickup', 'PayAtRestaurant', 'Stripe', 'Razorpay'], default: 'Stripe' },
         paymentStatus: { type: String, enum: ['Pending', 'Processing', 'Paid', 'Failed', 'Refunded', 'Cancelled', 'Partially Refunded'], default: 'Pending' },
         paymentId: { type: String, default: null }, // Gateway specific payment ID
         transactionId: { type: String, default: null },

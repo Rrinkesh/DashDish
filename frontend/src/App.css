@@ -1,42 +1,249 @@
+/* =========================================
+   DASHDISH — PREMIUM GLOBAL THEME
+========================================= */
+
+:root {
+    --bg-main: #f7f9fc;
+    --bg-white: #ffffff;
+    --bg-light: #f1f5fa;
+
+    --text-dark: #172033;
+    --text-muted: #6b7280;
+
+    --dominos-blue: #0066cc;
+    --dominos-red: #e31837;
+
+    --border-color: rgba(20, 35, 60, 0.08);
+
+    --dominos-shadow:
+        0 10px 35px rgba(24, 39, 75, 0.08);
+
+    --standard-transition:
+        all 0.3s ease;
+}
+
+
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: var(--text-dark);
+
+    background:
+        radial-gradient(
+            circle at 5% 8%,
+            rgba(0, 102, 204, 0.055),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 95% 35%,
+            rgba(227, 24, 55, 0.045),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f7f9fc 45%,
+            #f3f6fa 100%
+        );
+
+    background-attachment: fixed;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   MAIN APP BACKGROUND
+========================================= */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    min-height: 100vh;
+
+    position: relative;
+
+    isolation: isolate;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+/* =========================================
+   VERY SUBTLE AMBIENT LIGHT
+========================================= */
+
+#root::before {
+    content: "";
+
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    top: 100px;
+    left: -250px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 102, 204, 0.055),
+            transparent 68%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#root::after {
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    right: -280px;
+    top: 700px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(227, 24, 55, 0.045),
+            transparent 68%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+/* =========================================
+   COMMON PAGE CONTAINER
+========================================= */
+
+.app {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: transparent;
 }
 
-.card {
-  padding: 2em;
+
+/* =========================================
+   CONTENT SECTIONS
+========================================= */
+
+section {
+    position: relative;
 }
 
-.read-the-docs {
-  color: #888;
+
+/* =========================================
+   SELECTION
+========================================= */
+
+::selection {
+    background: var(--dominos-blue);
+
+    color: white;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eef2f7;
+}
+
+::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            var(--dominos-blue),
+            var(--dominos-red)
+        );
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dominos-blue);
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+    color: inherit;
+}
+
+
+/* =========================================
+   BUTTON DEFAULT
+========================================= */
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        background:
+            radial-gradient(
+                circle at 10% 5%,
+                rgba(0, 102, 204, 0.04),
+                transparent 30%
+            ),
+            linear-gradient(
+                180deg,
+                #ffffff,
+                #f6f8fb
+            );
+    }
+
+    #root::before,
+    #root::after {
+        opacity: 0.5;
+    }
+
 }

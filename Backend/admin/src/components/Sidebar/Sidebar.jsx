@@ -1,147 +1,405 @@
 import React from 'react'
 import './Sidebar.css'
-import { assets } from '../../assets/assets'
 import { NavLink } from 'react-router-dom'
 
+import {
+    ShoppingBag,
+    ChefHat,
+    PlusCircle,
+    UtensilsCrossed,
+    FolderPlus,
+    FolderOpen,
+    Package,
+    Settings2,
+    Bot,
+    Armchair,
+    CalendarDays,
+    Bike,
+    ClipboardList,
+    MapPin,
+    Ticket,
+    Wallet,
+    RotateCcw,
+    Users,
+    Settings,
+    BarChart3,
+    LayoutDashboard
+} from 'lucide-react'
+
+
 const Sidebar = () => {
-    // For demo purposes, fetch role from localStorage, fallback to OWNER if not set
-    const role = localStorage.getItem('role') || 'OWNER';
+
+    const role = localStorage.getItem('role') || 'OWNER'
+
+
+    const managementRoles = [
+        'SUPER_ADMIN',
+        'OWNER',
+        'admin',
+        'MANAGER'
+    ]
+
+
+    const ownerRoles = [
+        'SUPER_ADMIN',
+        'OWNER',
+        'admin'
+    ]
+
+
+    const isManagement =
+        managementRoles.includes(role)
+
+    const isOwner =
+        ownerRoles.includes(role)
+
 
     return (
-        <div className='sidebar'>
+
+        <aside className="sidebar">
+
             <div className="sidebar-options">
-                
-                {/* OWNER & MANAGER can see Orders */}
-                {['SUPER_ADMIN', 'OWNER', 'admin', 'MANAGER'].includes(role) && (
-                    <NavLink to='/order' className="sidebar-option">
-                        <img src={assets.add} alt="" />
-                        <p>Orders Dashboard</p>
+
+
+                {/* =================================
+                    OVERVIEW
+                ================================= */}
+
+                <div className="sidebar-section">
+
+                    <p className="sidebar-section-title">
+                        OVERVIEW
+                    </p>
+
+
+                    <NavLink
+                        to="/"
+                        className="sidebar-option"
+                    >
+                        <LayoutDashboard />
+                        <p>Dashboard</p>
                     </NavLink>
+
+                </div>
+
+
+                {/* =================================
+                    ORDERS
+                ================================= */}
+
+                {isManagement && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            ORDERS
+                        </p>
+
+
+                        <NavLink
+                            to="/order"
+                            className="sidebar-option"
+                        >
+                            <ShoppingBag />
+                            <p>Orders Dashboard</p>
+                        </NavLink>
+
+
+                        <NavLink
+                            to="/kitchen"
+                            className="sidebar-option"
+                        >
+                            <ChefHat />
+                            <p>Kitchen Screen</p>
+                        </NavLink>
+
+                    </div>
+
                 )}
 
-                {/* KITCHEN, OWNER, MANAGER can see Kitchen */}
-                {['SUPER_ADMIN', 'OWNER', 'admin', 'MANAGER', 'KITCHEN'].includes(role) && (
-                    <NavLink to='/kitchen' className="sidebar-option">
-                        <img src={assets.add} alt="" />
-                        <p>Kitchen Screen</p>
-                    </NavLink>
-                )}
 
-                {/* OWNER & MANAGER can manage Menu */}
-                {['SUPER_ADMIN', 'OWNER', 'admin', 'MANAGER'].includes(role) && (
-                    <>
-                        <NavLink to='/add' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+                {/* =================================
+                    MENU MANAGEMENT
+                ================================= */}
+
+                {isManagement && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            MENU MANAGEMENT
+                        </p>
+
+
+                        <NavLink
+                            to="/add"
+                            className="sidebar-option"
+                        >
+                            <PlusCircle />
                             <p>Add Item</p>
                         </NavLink>
-                        <NavLink to='/list' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/list"
+                            className="sidebar-option"
+                        >
+                            <UtensilsCrossed />
                             <p>List Items</p>
                         </NavLink>
-                        <NavLink to='/add-menu' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/add-menu"
+                            className="sidebar-option"
+                        >
+                            <FolderPlus />
                             <p>Add Category</p>
                         </NavLink>
-                        <NavLink to='/list-menu' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/list-menu"
+                            className="sidebar-option"
+                        >
+                            <FolderOpen />
                             <p>List Categories</p>
                         </NavLink>
-                        <NavLink to='/inventory' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/inventory"
+                            className="sidebar-option"
+                        >
+                            <Package />
                             <p>Inventory</p>
                         </NavLink>
-                        <NavLink to='/operations' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+                    </div>
+
+                )}
+
+
+                {/* =================================
+                    BUSINESS
+                ================================= */}
+
+                {isManagement && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            BUSINESS
+                        </p>
+
+
+                        <NavLink
+                            to="/operations"
+                            className="sidebar-option"
+                        >
+                            <BarChart3 />
                             <p>Operations Dashboard</p>
                         </NavLink>
-                        <NavLink to='/ai-insights' className="sidebar-option" style={{borderLeft: '3px solid #3498db'}}>
-                            <img src={assets.add} alt="" />
-                            <p>Business AI Insights</p>
-                        </NavLink>
-                    </>
-                )}
 
-                {/* OWNER & MANAGER can see Tables and Reservations */}
-                {['SUPER_ADMIN', 'OWNER', 'admin', 'MANAGER'].includes(role) && (
-                    <>
-                        <NavLink to='/tables' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+                        <NavLink
+                            to="/ai-insights"
+                            className="sidebar-option ai-option"
+                        >
+                            <Bot />
+                            <p>Business AI Insights</p>
+
+                            <span className="ai-badge">
+                                AI
+                            </span>
+
+                        </NavLink>
+
+
+                        <NavLink
+                            to="/tables"
+                            className="sidebar-option"
+                        >
+                            <Armchair />
                             <p>Tables Management</p>
                         </NavLink>
-                        <NavLink to='/reservations' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/reservations"
+                            className="sidebar-option"
+                        >
+                            <CalendarDays />
                             <p>Reservations</p>
                         </NavLink>
-                    </>
+
+                    </div>
+
                 )}
 
-                {/* OWNER & MANAGER can manage Deliveries */}
-                {['SUPER_ADMIN', 'OWNER', 'admin', 'MANAGER'].includes(role) && (
-                    <>
-                        <NavLink to='/delivery-partners' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+                {/* =================================
+                    DELIVERY
+                ================================= */}
+
+                {isManagement && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            DELIVERY
+                        </p>
+
+
+                        <NavLink
+                            to="/delivery-partners"
+                            className="sidebar-option"
+                        >
+                            <Bike />
                             <p>Delivery Partners</p>
                         </NavLink>
-                        <NavLink to='/delivery-management' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/delivery-management"
+                            className="sidebar-option"
+                        >
+                            <ClipboardList />
                             <p>Assign Deliveries</p>
                         </NavLink>
-                        <NavLink to='/live-tracking' className="sidebar-option">
-                            <img src={assets.order_icon} alt="" />
+
+
+                        <NavLink
+                            to="/live-tracking"
+                            className="sidebar-option"
+                        >
+                            <MapPin />
                             <p>Live Tracking</p>
                         </NavLink>
-                    </>
+
+                    </div>
+
                 )}
 
-                {/* DELIVERY role only sees their dashboard */}
-                {['DELIVERY'].includes(role) && (
-                    <>
-                        <NavLink to='/delivery-dashboard' className="sidebar-option">
-                            <img src={assets.order_icon} alt="" />
+
+                {/* =================================
+                    DELIVERY STAFF
+                ================================= */}
+
+                {role === 'DELIVERY' && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            MY DELIVERY
+                        </p>
+
+
+                        <NavLink
+                            to="/delivery-dashboard"
+                            className="sidebar-option"
+                        >
+                            <Bike />
                             <p>Delivery Dashboard</p>
                         </NavLink>
-                        <NavLink to='/delivery-history' className="sidebar-option">
-                            <img src={assets.order_icon} alt="" />
+
+
+                        <NavLink
+                            to="/delivery-history"
+                            className="sidebar-option"
+                        >
+                            <ClipboardList />
                             <p>Delivery History</p>
                         </NavLink>
-                    </>
+
+                    </div>
+
                 )}
 
-                {/* OWNER & MANAGER can manage Coupons */}
-                {['SUPER_ADMIN', 'OWNER', 'admin', 'MANAGER'].includes(role) && (
-                    <>
-                        <NavLink to='/coupons' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+                {/* =================================
+                    PROMOTIONS
+                ================================= */}
+
+                {isManagement && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            PROMOTIONS
+                        </p>
+
+
+                        <NavLink
+                            to="/coupons"
+                            className="sidebar-option"
+                        >
+                            <Ticket />
                             <p>Coupons</p>
                         </NavLink>
-                    </>
+
+                    </div>
+
                 )}
 
-                {/* OWNER can manage Staff, Settings, Finance, Refunds */}
-                {['SUPER_ADMIN', 'OWNER', 'admin'].includes(role) && (
-                    <>
-                        <NavLink to='/finance' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+                {/* =================================
+                    ADMINISTRATION
+                ================================= */}
+
+                {isOwner && (
+
+                    <div className="sidebar-section">
+
+                        <p className="sidebar-section-title">
+                            ADMINISTRATION
+                        </p>
+
+
+                        <NavLink
+                            to="/finance"
+                            className="sidebar-option"
+                        >
+                            <Wallet />
                             <p>Finance Dashboard</p>
                         </NavLink>
-                        <NavLink to='/refunds' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/refunds"
+                            className="sidebar-option"
+                        >
+                            <RotateCcw />
                             <p>Refunds</p>
                         </NavLink>
-                        <NavLink to='/staff' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/staff"
+                            className="sidebar-option"
+                        >
+                            <Users />
                             <p>Staff Management</p>
                         </NavLink>
-                        <NavLink to='/settings' className="sidebar-option">
-                            <img src={assets.add} alt="" />
+
+
+                        <NavLink
+                            to="/settings"
+                            className="sidebar-option"
+                        >
+                            <Settings />
                             <p>Restaurant Settings</p>
                         </NavLink>
-                    </>
+
+                    </div>
+
                 )}
 
             </div>
-        </div>
+
+        </aside>
     )
 }
+
 
 export default Sidebar

@@ -1,61 +1,420 @@
+/* ==============================
+   DELIVERY HISTORY PAGE
+================================ */
+
+
 .delivery-history {
-    padding: 20px;
-    width: 100%;
+
+    width:100%;
+
+    padding:30px;
+
+    background:#f8fafc;
+
+    min-height:100vh;
+
+    box-sizing:border-box;
+
 }
+
+
+
+.delivery-history h2 {
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:#1e293b;
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+/* ==============================
+   FILTER SECTION
+================================ */
+
 
 .filters {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    align-items:center;
+
+
+    background:white;
+
+
+    padding:20px;
+
+
+    border-radius:18px;
+
+
+    margin-bottom:30px;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(0,0,0,.06);
+
+
 }
 
-.filters input, .filters select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline-color: tomato;
+
+
+.filters input,
+.filters select {
+
+
+    padding:13px 15px;
+
+
+    border-radius:12px;
+
+
+    border:1px solid #cbd5e1;
+
+
+    outline:none;
+
+
+    font-size:15px;
+
+
+    background:white;
+
+
 }
+
+
+
+.filters input:focus,
+.filters select:focus {
+
+
+    border-color:#6366f1;
+
+
+    box-shadow:
+
+    0 0 0 4px rgba(99,102,241,.15);
+
+
+}
+
+
+
+
+/* CLEAR BUTTON */
+
 
 .clear-btn {
-    padding: 10px 15px;
-    background: #f1f2f6;
-    color: #576574;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+
+
+    padding:13px 22px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    background:#fee2e2;
+
+
+    color:#dc2626;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
 }
+
+
+
+.clear-btn:hover {
+
+
+    background:#dc2626;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+/* ==============================
+   TABLE CONTAINER
+================================ */
+
 
 .history-list {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+
+    background:white;
+
+
+    border-radius:22px;
+
+
+    overflow:hidden;
+
+
+    border:1px solid #e2e8f0;
+
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,.08);
+
+
 }
+
+
+
 
 .history-table {
-    width: 100%;
-    border-collapse: collapse;
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
 }
 
-.history-table th, .history-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
+
+
 
 .history-table th {
-    background-color: #f8f9fa;
-    color: #555;
+
+
+    padding:18px 22px;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #6366f1,
+
+        #8b5cf6
+
+    );
+
+
+    color:white;
+
+
+    text-align:left;
+
+
+    font-size:13px;
+
+
+    text-transform:uppercase;
+
+
+    letter-spacing:.5px;
+
+
 }
 
-.status-badge {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
+
+
+
+.history-table td {
+
+
+    padding:18px 22px;
+
+
+    border-bottom:
+
+    1px solid #f1f5f9;
+
+
+    color:#334155;
+
+
+    font-weight:500;
+
+
 }
-.status-badge.delivered { background: #55efc4; color: #00b894; }
-.status-badge.completed { background: #55efc4; color: #00b894; }
-.status-badge.cancelled { background: #ff7675; color: #d63031; }
-.status-badge.driver-rejected { background: #ffeaa7; color: #d63031; }
+
+
+
+
+.history-table tbody tr {
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.history-table tbody tr:hover {
+
+
+    background:#f8fafc;
+
+
+}
+
+
+
+
+
+/* ==============================
+   STATUS BADGES
+================================ */
+
+
+.status-badge {
+
+
+    padding:7px 15px;
+
+
+    border-radius:20px;
+
+
+    font-size:12px;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+/* Delivered */
+
+.status-badge.delivered,
+.status-badge.completed {
+
+
+    background:#dcfce7;
+
+
+    color:#15803d;
+
+
+}
+
+
+
+/* Cancelled */
+
+
+.status-badge.cancelled,
+.status-badge.driver-rejected {
+
+
+    background:#fee2e2;
+
+
+    color:#dc2626;
+
+
+}
+
+
+
+
+
+/* ==============================
+   EMPTY STATE
+================================ */
+
+
+.history-list > p {
+
+
+    padding:40px;
+
+
+    text-align:center;
+
+
+    color:#64748b;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+
+@media(max-width:900px){
+
+
+    .delivery-history {
+
+
+        padding:15px;
+
+
+    }
+
+
+
+    .filters {
+
+
+        flex-direction:column;
+
+
+        align-items:stretch;
+
+
+    }
+
+
+
+    .history-list {
+
+
+        overflow-x:auto;
+
+
+    }
+
+
+
+}

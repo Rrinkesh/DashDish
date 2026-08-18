@@ -31,7 +31,7 @@ const placeorder = async (req, res) => {
             
             // New Payment/Billing fields
             paymentMethod: req.body.paymentMethod || 'Stripe',
-            couponId: req.body.couponId || null,
+            couponId: (req.body.couponId && req.body.couponId !== "") ? req.body.couponId : null,
             discountAmount: req.body.discountAmount || 0,
             taxAmount: req.body.taxAmount || 0,
             deliveryFee: req.body.deliveryFee || 0,
@@ -49,7 +49,7 @@ const placeorder = async (req, res) => {
                     product_data: {
                         name: item.name
                     },
-                    unit_amount: item.price * 100 * 80
+                    unit_amount: Math.round(item.price * 100)
                 },
                 quantity: item.quantity
             }));
@@ -58,9 +58,9 @@ const placeorder = async (req, res) => {
                 price_data: {
                     currency: "inr",
                     product_data: {
-                        name: "delivery charge"
+                        name: "Delivery Charge"
                     },
-                    unit_amount: (req.body.deliveryFee || 2) * 100 * 80
+                    unit_amount: Math.round((req.body.deliveryFee || 2) * 100)
                 },
                 quantity: 1,
             });
@@ -89,7 +89,7 @@ const verifyorder =async (req,res)=>{
  const {orderid,success} =req.body;
  try {
     if(success=="true"){
-        await ordermodel.findByIdAndUpdate(orderid,{payment:true});
+        await ordermodel.findByIdAndUpdate(orderid,{payment:true, paymentStatus: 'Paid'});
         
         // Broadcast new order to kitchen and admin
         try {

@@ -6,7 +6,7 @@ const analyticsRouter = express.Router();
 
 const aiLimiter = rateLimit({
     windowMs: 5 * 60 * 1000, 
-    max: 20,
+    max: 100,
     message: { success: false, message: "Too many requests. Please wait." }
 });
 

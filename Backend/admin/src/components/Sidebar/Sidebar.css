@@ -1,56 +1,427 @@
-.sidebar{
-    width: 18%;
-    min-height: 100vh;
-    border-right: 1px solid var(--border-color);
-    background-color: var(--bg-white);
-    font-size: max(1vw, 12px);
-    box-shadow: 2px 0 10px rgba(0,0,0,0.02);
-}
-.sidebar-options{
-    padding-top: 50px;
-    padding-left: 15%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.sidebar-option{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border: 1px solid var(--border-color);
-    border-right: 0;
-    padding: 12px 15px;
-    border-radius: 8px 0px 0px 8px;
-    cursor: pointer;
-    background-color: var(--bg-white);
-    transition: var(--standard-transition);
-    color: var(--text-dark);
-    font-weight: 500;
-}
-.sidebar-option:hover {
-    background-color: #f0f8ff;
-    border-color: var(--dominos-blue);
-}
-.sidebar-option.active{
-    background-color: #f0f8ff;
-    border-color: var(--dominos-blue);
-    color: var(--dominos-blue);
-    font-weight: 700;
-    box-shadow: -2px 2px 5px rgba(0,85,165,0.05);
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+
+    height: calc(100vh - 70px);
+
+    position: sticky;
+    top: 70px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #07111f 0%,
+            #0b1728 100%
+        );
+
+    color: white;
+
+    border-right: 1px solid rgba(255,255,255,0.06);
+
+    box-shadow:
+        8px 0 30px rgba(0,0,0,0.08);
+
+    scrollbar-width: thin;
+    scrollbar-color: #34445a transparent;
 }
 
-@media(max-width:900px){
-    .sidebar-option p{
-         display: none;
+
+.sidebar-options {
+    position: relative;
+
+    z-index: 2;
+
+    padding: 24px 12px 35px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.sidebar-section {
+    margin-bottom: 20px;
+}
+
+
+.sidebar-section-title {
+    margin: 0;
+
+    padding:
+        0 13px 8px;
+
+    color:
+        rgba(255,255,255,0.35);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================
+   OPTION
+========================================= */
+
+.sidebar-option {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 9px 13px;
+
+    margin-bottom: 3px;
+
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,0.62);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* =========================================
+   LUCIDE ICON
+========================================= */
+
+.sidebar-option svg {
+    width: 19px;
+    height: 19px;
+
+    min-width: 19px;
+
+    stroke-width: 1.8;
+
+    opacity: 0.65;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+.sidebar-option p {
+    margin: 0;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.sidebar-option:hover {
+    color: white;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border-color:
+        rgba(255,255,255,0.06);
+
+    transform:
+        translateX(3px);
+}
+
+
+.sidebar-option:hover svg {
+    opacity: 1;
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================
+   ACTIVE
+========================================= */
+
+.sidebar-option.active {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(227,24,55,0.22),
+            rgba(227,24,55,0.06)
+        );
+
+    border-color:
+        rgba(227,24,55,0.18);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.12);
+}
+
+
+.sidebar-option.active svg {
+    opacity: 1;
+
+    color: #ff5269;
+}
+
+
+/* =========================================
+   ACTIVE INDICATOR
+========================================= */
+
+.sidebar-option.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: -12px;
+
+    top: 8px;
+
+    bottom: 8px;
+
+    width: 3px;
+
+    border-radius:
+        0 5px 5px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ff5269,
+            #e31837
+        );
+
+    box-shadow:
+        0 0 12px rgba(227,24,55,0.65);
+}
+
+
+/* =========================================
+   AI INSIGHTS
+========================================= */
+
+.ai-option {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(52,152,219,0.10),
+            rgba(52,152,219,0.02)
+        );
+
+    border-color:
+        rgba(52,152,219,0.12);
+}
+
+
+.ai-option svg {
+    color: #59b7ff;
+
+    opacity: 1;
+}
+
+
+.ai-option p {
+    color: #65b9ff;
+}
+
+
+.ai-badge {
+    margin-left: auto;
+
+    padding: 3px 6px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(52,152,219,0.18);
+
+    color:
+        #65b9ff;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #34445a;
+
+    border-radius: 10px;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #4b5f78;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 230px;
+        min-width: 230px;
     }
-    .sidebar-options {
-        padding-left: 10%;
-    }
+
     .sidebar-option {
-        justify-content: center;
-        border-radius: 0;
-        border: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 15px 0;
+        font-size: 12px;
     }
+
+}
+
+
+/* =========================================
+   COLLAPSED
+========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 70px;
+        min-width: 70px;
+
+        top: 60px;
+
+        height:
+            calc(100vh - 60px);
+    }
+
+
+    .sidebar-options {
+        padding:
+            20px 7px;
+    }
+
+
+    .sidebar-section-title {
+        display: none;
+    }
+
+
+    .sidebar-section {
+        margin-bottom: 8px;
+    }
+
+
+    .sidebar-option {
+        width: 56px;
+
+        height: 50px;
+
+        min-height: 50px;
+
+        justify-content: center;
+
+        padding: 0;
+
+        margin-bottom: 4px;
+    }
+
+
+    .sidebar-option p {
+        display: none;
+    }
+
+
+    .sidebar-option svg {
+        width: 21px;
+        height: 21px;
+    }
+
+
+    .sidebar-option.active::before {
+        left: -7px;
+
+        top: 9px;
+        bottom: 9px;
+    }
+
+
+    .ai-badge {
+        display: none;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .sidebar {
+        width: 60px;
+        min-width: 60px;
+    }
+
+
+    .sidebar-option {
+        width: 46px;
+
+        height: 45px;
+
+        min-height: 45px;
+    }
+
+
+    .sidebar-option svg {
+        width: 19px;
+        height: 19px;
+    }
+
 }

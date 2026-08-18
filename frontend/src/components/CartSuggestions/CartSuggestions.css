@@ -1,37 +1,378 @@
+/* =====================================================
+   CART SUGGESTIONS
+===================================================== */
+
 .cart-suggestions {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
+    position: relative;
+
+    margin-top: 45px;
+    padding: 28px 26px 25px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 85, 165, 0.045),
+            rgba(255, 255, 255, 0.95) 45%,
+            rgba(227, 24, 55, 0.035)
+        );
+
+    border:
+        1px solid rgba(0, 85, 165, 0.08);
+
+    box-shadow:
+        0 10px 30px rgba(20, 35, 60, 0.06);
+
+    animation:
+        suggestionsFadeIn 0.6s ease;
 }
+
+
+@keyframes suggestionsFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   DECORATIVE BACKGROUND
+===================================================== */
+
+.cart-suggestions::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -100px;
+    right: -60px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 85, 165, 0.10),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+.cart-suggestions::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    bottom: -100px;
+    left: -60px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(227, 24, 55, 0.07),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
 
 .cart-suggestions h3 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #333;
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin: 0 0 5px;
+
+    color: var(--text-dark);
+
+    font-size: clamp(20px, 2vw, 25px);
+
+    font-weight: 800;
+
+    letter-spacing: -0.4px;
 }
+
+
+/* Red/blue accent */
+
+.cart-suggestions h3::before {
+    content: "";
+
+    width: 5px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--dominos-blue),
+            var(--dominos-red)
+        );
+}
+
+
+/* =====================================================
+   OPTIONAL SUBTITLE
+===================================================== */
+
+.cart-suggestions h3::after {
+    content: "Picked based on your cart";
+
+    align-self: flex-end;
+
+    margin-left: 5px;
+
+    margin-bottom: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    letter-spacing: 0;
+}
+
+
+/* =====================================================
+   HORIZONTAL LIST
+===================================================== */
 
 .suggestions-list {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    gap: 20px;
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding:
+        5px 5px 15px;
+
+    overflow-x: auto;
+
+    scroll-behavior: smooth;
+
+    scroll-snap-type: x mandatory;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(0, 85, 165, 0.25)
+        transparent;
 }
+
 
 .suggestions-list::-webkit-scrollbar {
-  height: 6px;
+    height: 5px;
 }
+
 
 .suggestions-list::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+    background: transparent;
 }
+
 
 .suggestions-list::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 4px;
+    background:
+        rgba(0, 85, 165, 0.20);
+
+    border-radius: 20px;
 }
 
+
+.suggestions-list::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(0, 85, 165, 0.35);
+}
+
+
+/* =====================================================
+   SUGGESTION CARD
+===================================================== */
+
 .suggestion-card {
-  min-width: 250px;
-  flex-shrink: 0;
+    position: relative;
+
+    flex:
+        0 0 245px;
+
+    scroll-snap-align: start;
+
+    border-radius: 16px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.suggestion-card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =====================================================
+   FOOD ITEM INSIDE SUGGESTION
+===================================================== */
+
+.suggestion-card .food-item {
+    border-radius: 16px;
+
+    border:
+        1px solid rgba(0, 0, 0, 0.06);
+
+    box-shadow:
+        0 7px 20px rgba(20, 35, 60, 0.08);
+
+    transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.suggestion-card:hover .food-item {
+    border-color:
+        rgba(0, 85, 165, 0.18);
+
+    box-shadow:
+        0 14px 30px rgba(20, 35, 60, 0.13);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.suggestion-card .food-item-img {
+    height: 175px;
+
+    transition:
+        transform 0.45s
+        cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+
+.suggestion-card:hover .food-item-img {
+    transform: scale(1.04);
+}
+
+
+/* =====================================================
+   PRICE
+===================================================== */
+
+.suggestion-card .food-item-price {
+    color: var(--dominos-red);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .cart-suggestions {
+        margin-top: 35px;
+
+        padding:
+            22px 15px 20px;
+
+        border-radius: 17px;
+    }
+
+
+    .cart-suggestions h3 {
+        font-size: 19px;
+    }
+
+
+    .cart-suggestions h3::after {
+        display: none;
+    }
+
+
+    .suggestions-list {
+        gap: 15px;
+
+        margin-top: 17px;
+
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+
+    .suggestion-card {
+        flex-basis: 220px;
+    }
+
+
+    .suggestion-card .food-item-img {
+        height: 155px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .cart-suggestions {
+        padding:
+            20px 12px;
+    }
+
+
+    .suggestion-card {
+        flex-basis: 205px;
+    }
+
+
+    .suggestion-card .food-item-img {
+        height: 145px;
+    }
+
 }

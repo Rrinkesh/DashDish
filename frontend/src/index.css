@@ -1,74 +1,256 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
 
 :root {
-  --dominos-blue: #0055a5;
-  --dominos-red: #e31837;
-  --bg-white: #ffffff;
-  --bg-light: #f5f5f5;
-  --text-dark: #333333;
-  --text-muted: #666666;
-  --border-color: #dddddd;
-  --dominos-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  --standard-transition: all 0.2s ease;
+    --dominos-blue: #0055a5;
+    --dominos-red: #e31837;
+
+    --bg-white: #ffffff;
+    --bg-light: #f4f7fb;
+
+    --text-dark: #172033;
+    --text-muted: #687386;
+
+    --border-color: #e5eaf1;
+
+    --dominos-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.07);
+
+    --standard-transition:
+        all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
-  scroll-behavior: smooth;
+
+    padding: 0;
+
+    margin: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Outfit', sans-serif;
+
+    scroll-behavior: smooth;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
 }
 
 body {
-  min-height: 100vh;
-  background-color: var(--bg-white);
-  color: var(--text-dark);
-  overflow-x: hidden;
+    min-height: 100vh;
+    color: var(--text-dark);
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(0, 85, 165, 0.07),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(227, 24, 55, 0.06),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(0, 85, 165, 0.05),
+            transparent 30%
+        ),
+        #f8fafc;
+
+    background-attachment: fixed;
 }
+
 
 p {
-  text-decoration: none;
-  color: var(--text-muted);
+
+    text-decoration: none;
+
+    color: var(--text-muted);
+
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--dominos-blue);
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color: var(--dominos-blue);
+
 }
+
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+input {
+
+    font-family: inherit;
+
+}
+
 
 .logo {
-  height: 35px;
-  width: auto;
+
+    height: 35px;
+
+    width: auto;
+
 }
+
 
 .app {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  transition: var(--standard-transition);
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    transition: var(--standard-transition);
+
 }
 
-@media(max-width: 768px) {
-  .app {
-    width: 95%;
-  }
-}
+
+/* =====================================================
+   GLOBAL ANIMATIONS
+===================================================== */
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+
+    0% {
+
+        opacity: 0;
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+    }
+
 }
 
-/* Global Button Smoothness */
-button, .view-menu-btn, .food-item-img-container .add, .food-item-counter img {
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+@keyframes slideUp {
+
+    0% {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
 }
 
-button:active, .view-menu-btn:active, .food-item-img-container .add:active, .food-item-counter img:active {
-  transform: scale(0.92) !important;
+
+/* =====================================================
+   GLOBAL BUTTON
+===================================================== */
+
+button,
+.view-menu-btn,
+.food-item-img-container .add,
+.food-item-counter img {
+
+    cursor: pointer;
+
+    transition:
+        all 0.3s cubic-bezier(
+            0.4,
+            0,
+            0.2,
+            1
+        );
+
 }
 
-button:hover {
-  filter: brightness(1.1);
+
+button:active,
+.view-menu-btn:active,
+.food-item-img-container .add:active,
+.food-item-counter img:active {
+
+    transform: scale(0.96);
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+    background:
+        #f1f4f8;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--dominos-blue),
+            var(--dominos-red)
+        );
+
+    border-radius: 10px;
+
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+    background:
+        var(--dominos-blue);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .app {
+
+        width: 95%;
+
+    }
+
 }

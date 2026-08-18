@@ -1,147 +1,975 @@
+/* =====================================================
+   NAVBAR
+===================================================== */
+
 .navbar {
-    padding: 25px 0px; /* slightly more padding for a cleaner look */
+    width: 100%;
+    height: 76px;
+
+    padding: 0 5%;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: var(--bg-white);
-    /* Removed the hard border line */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Softer, slightly larger shadow for separation */
-    margin-bottom: 20px;
+
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.06);
+
+    transition: all 0.3s ease;
 }
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+/* =====================================================
+   LOGO - SLEEK BADGE STYLE
+===================================================== */
+
 .navbar .logo {
-    width: 150px;
-    transition: var(--standard-transition);
-    /* This makes the white background of the image transparent, leaving only the text/figure */
-    mix-blend-mode: multiply;
+    height: 44px;
+    width: auto;
+    max-width: 160px;
+    display: block;
+    cursor: pointer;
+    object-fit: contain;
+    
+    /* Rounded Badge Shape */
+    padding: 6px 16px;
+    border-radius: 9999px;
+    
+    /* Modern Dark Theme styling with subtle border */
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 4px 14px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .navbar .logo:hover {
-    transform: scale(1.05);
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 
+        0 8px 22px rgba(227, 24, 55, 0.25),
+        0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: rgba(227, 24, 55, 0.4);
 }
-.navbar-profile img {
-    width: 40px;
-    border-radius: 50%;
-}
+/* =====================================================
+   NAVIGATION MENU
+===================================================== */
+
 .navbar-menu {
     display: flex;
-    list-style: none;
-    gap: 90px;
-    color: var(--dominos-blue);
-    font-size: 18px;
-    font-weight: 600;
-}
-.navbar-right {
-    display: flex;
     align-items: center;
-    gap: 40px;
-}
-.navbar button {
-    background: transparent;
+
+    gap: 42px;
+
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
     font-size: 16px;
+
     font-weight: 600;
-    border: 2px solid var(--dominos-blue);
-    color: var(--dominos-blue);
-    padding: 10px 30px;
-    border-radius: 4px; /* Domino's uses subtle rounding */
-    cursor: pointer;
-    transition: var(--standard-transition);
 }
-.navbar button:hover {
-    background-color: var(--dominos-blue);
-    color: var(--bg-white);
+
+.navbar-menu a {
+    position: relative;
+
+    text-decoration: none;
+
+    color: var(--text-dark);
+
+    padding: 8px 2px;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
-.navbar-menu .active {
+
+.navbar-menu a:hover {
     color: var(--dominos-red);
+}
+
+
+/* =====================================================
+   ACTIVE UNDERLINE
+===================================================== */
+
+.navbar-menu a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -5px;
+
+    width: 0;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--dominos-red),
+            #ff4b63
+        );
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+}
+
+.navbar-menu a.active {
+    color: var(--dominos-red);
+
     font-weight: 700;
 }
-.navbar li {
+
+.navbar-menu a.active::after {
+    width: 22px;
+}
+
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.navbar-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+/* =====================================================
+   SEARCH ICON
+===================================================== */
+
+.navbar-right > .navbar-search {
+    width: 21px;
+    height: 21px;
+
+    object-fit: contain;
+
     cursor: pointer;
-    transition: var(--standard-transition);
+
+    padding: 9px;
+
+    box-sizing: content-box;
+
+    border-radius: 50%;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
 }
-.navbar li:hover {
-    color: var(--dominos-red);
+
+.navbar-right > .navbar-search:hover {
+    background: #f2f5ff;
+
+    transform: scale(1.1);
 }
+
+
+/* =====================================================
+   CART
+===================================================== */
+
 .navbar-search-icon {
     position: relative;
-    cursor: pointer;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
 }
+
+.navbar-search-icon:hover {
+    background: #f2f5ff;
+
+    transform: translateY(-2px);
+}
+
+.navbar-search-icon > a {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
 .navbar-search-icon img {
-    /* No invert needed on white background */
-    filter: none;
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
 }
+
+
+/* =====================================================
+   CART DOT
+===================================================== */
+
 .navbar-search-icon .dot {
     position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: var(--dominos-red);
-    border-radius: 5px;
-    top: -8px;
-    right: -8px;
+
+    top: 3px;
+    right: 2px;
+
+    width: 9px;
+    height: 9px;
+
+    min-width: 9px;
+    min-height: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dominos-red),
+            #ff334f
+        );
+
+    border: 2px solid white;
+
+    border-radius: 50%;
+
+    animation: cartPulse 1.8s infinite;
 }
+
+
+@keyframes cartPulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(227, 24, 55, 0.45);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 6px rgba(227, 24, 55, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(227, 24, 55, 0);
+    }
+
+}
+
+
+/* =====================================================
+   SIGN IN BUTTON
+===================================================== */
+
+.navbar-right > button {
+    border: none;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dominos-blue),
+            #0055b8
+        );
+
+    padding: 11px 25px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 15px rgba(0, 102, 204, 0.2);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.navbar-right > button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 102, 204, 0.3);
+}
+
+.navbar-right > button:active {
+    transform: scale(0.96);
+}
+
+
+/* =====================================================
+   PROFILE WRAPPER
+===================================================== */
+
 .navbar-profile {
     position: relative;
-    cursor: pointer;
-}
-.nav-profile-dropdown {
-    position: absolute;
-    display: none;
-    right: 0;
-    z-index: 1;
-    /* Bridge the gap so hover state isn't lost */
-    top: 100%;
-    padding-top: 10px;
-}
-.nav-profile-dropdown li {
+
     display: flex;
+
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    color: var(--text-dark);
 }
-.nav-profile-dropdown img {
-    width: 20px;
-    filter: none;
-}
-.navbar-profile:hover .nav-profile-dropdown {
+
+
+/* =====================================================
+   PROFILE TRIGGER
+===================================================== */
+
+.profile-trigger {
+    width: 46px;
+    height: 46px;
+
+    padding: 3px !important;
+
+    border: none !important;
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    border-radius: 50%;
+
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: var(--bg-white);
-    padding: 12px 25px;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    list-style: none;
-    box-shadow: var(--dominos-shadow);
-    animation: fadeIn 0.3s ease;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
 }
-.nav-profile-dropdown li:hover {
+
+
+/* Profile image */
+
+.profile-trigger > img {
+    width: 40px;
+    height: 40px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid transparent;
+
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(
+            135deg,
+            var(--dominos-blue),
+            var(--dominos-red)
+        ) border-box;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* Hover */
+
+.profile-trigger:hover > img {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =====================================================
+   CHEVRON
+===================================================== */
+
+.profile-chevron {
+    position: absolute;
+
+    right: -3px;
+    bottom: 1px;
+
+    width: 16px;
+    height: 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--dominos-red);
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 7px;
+
+    border: 2px solid white;
+
+    transition: transform 0.3s ease;
+}
+
+.profile-open .profile-chevron {
+    transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN
+===================================================== */
+
+.nav-profile-dropdown {
+
+    position: absolute;
+
+    top: calc(100% + 12px);
+
+    right: -8px;
+
+    width: 270px;
+
+    padding: 10px;
+
+    background: rgba(255, 255, 255, 0.98);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(0, 0, 0, 0.07);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.16),
+        0 5px 20px rgba(0, 0, 0, 0.08);
+
+    animation:
+        profileDropdownIn
+        0.25s
+        cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    transform-origin: top right;
+
+    z-index: 9999;
+}
+
+
+/* =====================================================
+   DROPDOWN ARROW
+===================================================== */
+
+.nav-profile-dropdown::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -7px;
+
+    right: 20px;
+
+    width: 14px;
+    height: 14px;
+
+    background: white;
+
+    transform: rotate(45deg);
+
+    border-left:
+        1px solid rgba(0, 0, 0, 0.07);
+
+    border-top:
+        1px solid rgba(0, 0, 0, 0.07);
+}
+
+
+/* =====================================================
+   DROPDOWN ANIMATION
+===================================================== */
+
+@keyframes profileDropdownIn {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-12px)
+            scale(0.92);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   DROPDOWN HEADER
+===================================================== */
+
+.profile-dropdown-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* Avatar */
+
+.profile-dropdown-avatar {
+
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    padding: 2px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dominos-blue),
+            var(--dominos-red)
+        );
+}
+
+.profile-dropdown-avatar img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid white;
+}
+
+
+/* Header text */
+
+.profile-dropdown-header h4 {
+
+    margin: 0 0 3px;
+
+    color: var(--text-dark);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.profile-dropdown-header span {
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   DIVIDER
+===================================================== */
+
+.dropdown-divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    margin: 5px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e6e6e6,
+            transparent
+        );
+}
+
+
+/* =====================================================
+   DROPDOWN ITEM
+===================================================== */
+
+.profile-dropdown-item {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 11px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.profile-dropdown-item:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f7ff,
+            #fafbff
+        );
+
+    transform: translateX(3px);
+}
+
+
+/* =====================================================
+   DROPDOWN ICON
+===================================================== */
+
+.dropdown-icon {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #f1f5ff;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.profile-dropdown-item:hover .dropdown-icon {
+
+    background: #e7edff;
+
+    transform: scale(1.05);
+}
+
+.dropdown-icon img {
+
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   DROPDOWN TEXT
+===================================================== */
+
+.dropdown-text {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.dropdown-text strong {
+
+    color: var(--text-dark);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: color 0.2s ease;
+}
+
+.dropdown-text span {
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+.profile-dropdown-item:hover .dropdown-text strong {
+
+    color: var(--dominos-blue);
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.dropdown-arrow {
+
+    color: #aaa;
+
+    font-size: 18px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.profile-dropdown-item:hover .dropdown-arrow {
+
+    color: var(--dominos-blue);
+
+    transform: translateX(3px);
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.logout-item:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff3f5,
+            #fff9fa
+        );
+}
+
+.logout-icon {
+
+    background: #fff0f2;
+}
+
+.logout-item:hover .logout-icon {
+
+    background: #ffe1e5;
+}
+
+.logout-item .dropdown-text strong {
+
     color: var(--dominos-red);
 }
 
-@media(max-width:900px){
-    .navbar .logo{
-        width: 140px;
-    }
-    .navbar-menu{
-        gap: 15px;
-        font-size: 16px;
-    }
-    .navbar-right{
-        gap: 20px;
-    }
-    .navbar-right img{
-        width: 20px;
-    }
-    .navbar-right button{
-        padding: 7px 20px;
-        font-size: 15px;
-    }
+.logout-item:hover .dropdown-text strong {
+
+    color: #c8102e;
 }
 
-@media(max-width:750px){
-    .navbar-menu{
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .navbar {
+
+        padding: 0 3%;
+    }
+
+    .navbar-menu {
+
+        gap: 25px;
+
+        font-size: 15px;
+    }
+
+    .navbar-right {
+
+        gap: 16px;
+    }
+
+    .navbar .logo {
+
+        width: 130px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .navbar {
+
+        height: 68px;
+
+        padding: 0 18px;
+
+        gap: 10px;
+    }
+
+    .navbar .logo {
+
+        width: 120px;
+    }
+
+    .navbar-menu {
+
         display: none;
     }
+
+    .navbar-right {
+
+        gap: 8px;
+    }
+
+    .navbar-right > .navbar-search {
+
+        width: 19px;
+        height: 19px;
+
+        padding: 7px;
+    }
+
+    .navbar-search-icon {
+
+        width: 36px;
+        height: 36px;
+    }
+
+    .navbar-search-icon img {
+
+        width: 20px;
+        height: 20px;
+    }
+
+    .navbar-right > button {
+
+        padding: 9px 15px;
+
+        font-size: 13px;
+
+        border-radius: 8px;
+    }
+
+    .profile-trigger {
+
+        width: 42px;
+        height: 42px;
+    }
+
+    .profile-trigger > img {
+
+        width: 36px;
+        height: 36px;
+    }
+
+    .profile-chevron {
+
+        width: 14px;
+        height: 14px;
+
+        font-size: 6px;
+    }
+
+    .nav-profile-dropdown {
+
+        width: 250px;
+
+        right: -5px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 420px) {
+
+    .navbar {
+
+        padding: 0 12px;
+    }
+
+    .navbar .logo {
+
+        width: 105px;
+    }
+
+    .navbar-right {
+
+        gap: 3px;
+    }
+
+    .navbar-right > button {
+
+        padding: 8px 12px;
+
+        font-size: 12px;
+    }
+
+    .nav-profile-dropdown {
+
+        width: 235px;
+
+        right: -5px;
+    }
+
 }

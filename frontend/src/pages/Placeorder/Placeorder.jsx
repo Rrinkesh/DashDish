@@ -61,7 +61,7 @@ const AddressAutocomplete = ({ setdata }) => {
 };
 
 const Placeorder = () => {
-  const { gettotalamount, token, food_list, cartitems, url } = useContext(StoreContext);
+  const { gettotalamount, token, food_list, cartitems, setcartitems, url } = useContext(StoreContext);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "",
     libraries
@@ -136,12 +136,12 @@ const Placeorder = () => {
       const res = await axios.post(url + '/api/payment/create-order', { orderId, amount: grandTotal }, { headers: { token } });
       
       if(!res.data.success) {
-        alert("Failed to initiate payment");
+        alert("Failed to initiate payment: " + (res.data.message || "Unknown error"));
         return;
       }
       
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_mockkey123',
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_TQtrY2pVD7enH4',
         amount: res.data.amount,
         currency: res.data.currency,
         name: "DashDish",
@@ -157,7 +157,8 @@ const Placeorder = () => {
           };
           const verifyRes = await axios.post(url + '/api/payment/verify', verifyData, { headers: { token } });
           if(verifyRes.data.success) {
-            navigate(`/myorders`); // or success page
+            setcartitems({});
+            navigate(`/myorders`);
           } else {
             alert("Payment Verification Failed");
           }
@@ -175,7 +176,7 @@ const Placeorder = () => {
 
     } catch (err) {
       console.error(err);
-      alert("Razorpay error");
+      alert("Razorpay error: " + (err.response?.data?.message || err.message));
     }
   };
 
@@ -214,28 +215,18 @@ const Placeorder = () => {
       if (response.data.success) {
         if (paymentMethod === 'Stripe') {
           window.location.replace(response.data.session_url);
-        } else if (paymentMethod === 'Razorpay') {
+        } else if (paymentMethod === 'Razorpay' || paymentMethod === 'UPI') {
           handleRazorpayPayment(response.data.orderId);
-        } else if (paymentMethod === 'UPI') {
-          const upiId = window.prompt("Enter your UPI ID (e.g., user@upi) to complete payment:");
-          if (upiId) {
-             alert(`Payment request sent to ${upiId}. Waiting for approval...`);
-             setTimeout(() => {
-                navigate(`/verify?success=true&orderid=${response.data.orderId}`);
-             }, 2000);
-          } else {
-             alert("UPI Payment cancelled.");
-          }
         } else {
-          // COD or PayAtRestaurant
+          setcartitems({});
           navigate('/myorders');
         }
       } else {
-        alert("Order failed");
+        alert("Order failed: " + (response.data.message || "Server error"));
       }
     } catch (error) {
       console.error(error);
-      alert("Server error");
+      alert("Server error: " + (error.response?.data?.message || error.message));
     }
   };
 

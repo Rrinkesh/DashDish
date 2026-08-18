@@ -1,4 +1,4 @@
-import logo from './logo.jpg'
+import logo from './logo.png'
 import profile from './profile.jpg'
 import add from './add.png'
 import upload from './upload.png'

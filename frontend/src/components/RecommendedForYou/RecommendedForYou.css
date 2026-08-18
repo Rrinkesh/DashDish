@@ -1,64 +1,422 @@
+/* =========================================
+   RECOMMENDED FOR YOU
+========================================= */
+
 .recommended-section {
-    margin-top: 30px;
-    padding: 20px 0;
-    animation: fadeIn 1s ease-in;
+    position: relative;
+
+    margin-top: 65px;
+
+    padding: 30px 0 20px;
+
+    animation:
+        recommendationFadeIn 0.7s ease forwards;
 }
+
+
+/* =========================================
+   BACKGROUND GLOW
+========================================= */
+
+.recommended-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    top: -80px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 85, 165, 0.07),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
 
 .recommended-header {
-    margin-bottom: 20px;
-    padding: 0 10px; /* Slight padding to align with container edges */
+    position: relative;
+
+    margin-bottom: 18px;
+
+    padding: 0 5px;
 }
+
+
+/* =========================================
+   TITLE
+========================================= */
 
 .recommended-header h2 {
-    font-size: clamp(20px, 2.5vw, 26px);
-    font-weight: 700;
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0;
+
     color: var(--text-dark);
+
+    font-size:
+        clamp(24px, 2.5vw, 32px);
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
 }
+
+
+/* AI / recommendation icon */
+
+.recommended-header h2::before {
+    content: "✨";
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 85, 165, 0.1),
+            rgba(227, 24, 55, 0.08)
+        );
+
+    font-size: 19px;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================
+   REASON
+========================================= */
 
 .recommended-reason {
-    font-size: 14px;
+    display: inline-flex;
+
+    align-items: center;
+
+    margin: 9px 0 0 48px;
+
+    padding: 6px 12px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(227, 24, 55, 0.07);
+
+    border:
+        1px solid rgba(227, 24, 55, 0.12);
+
     color: var(--dominos-red);
+
+    font-size: 13px;
+
     font-weight: 600;
-    margin-top: 5px;
-    letter-spacing: 0.5px;
+
+    line-height: 1.4;
 }
 
-/* Horizontal Scroller */
+
+/* =========================================
+   SCROLLER
+========================================= */
+
 .recommended-scroller {
+    position: relative;
+
     width: 100%;
+
     overflow-x: auto;
+
     overflow-y: hidden;
-    padding: 10px; /* padding for box-shadows */
-    
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+
+    padding: 15px 8px 25px;
+
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
 }
 
 .recommended-scroller::-webkit-scrollbar {
     display: none;
 }
 
+
+/* =========================================
+   FADE EDGES
+========================================= */
+
+.recommended-scroller::before,
+.recommended-scroller::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 20px;
+
+    width: 45px;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+.recommended-scroller::before {
+    left: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--bg-main),
+            transparent
+        );
+}
+
+.recommended-scroller::after {
+    right: 0;
+
+    background:
+        linear-gradient(
+            270deg,
+            var(--bg-main),
+            transparent
+        );
+}
+
+
+/* =========================================
+   LIST
+========================================= */
+
 .recommended-list {
     display: flex;
-    gap: 20px;
-    width: max-content; /* Allows it to expand horizontally based on content */
+
+    gap: 22px;
+
+    width: max-content;
+
+    padding: 0 5px;
 }
 
-/* Limit card width so they don't stretch */
+
+/* =========================================
+   CARD WRAPPER
+========================================= */
+
 .recommended-card-wrapper {
-    width: 250px;
+    width: 255px;
+
     flex-shrink: 0;
+
+    position: relative;
+
+    transition:
+        transform 0.3s ease;
 }
 
-/* Adjusting the Fooditem styles if they inherit bad widths */
+.recommended-card-wrapper:hover {
+    transform: translateY(-7px);
+}
+
+
+/* =========================================
+   FOOD ITEM
+========================================= */
+
 .recommended-card-wrapper .food-item {
-    margin: 0; 
-    height: 100%; 
+    margin: 0;
+
+    height: 100%;
+
+    box-shadow:
+        0 8px 25px rgba(20, 35, 60, 0.07);
+
+    transition:
+        box-shadow 0.3s ease;
 }
 
-@media(max-width: 768px) {
+.recommended-card-wrapper:hover .food-item {
+    box-shadow:
+        0 18px 40px rgba(20, 35, 60, 0.13);
+}
+
+
+/* =========================================
+   PERSONALIZED BADGE
+========================================= */
+
+.recommended-card-wrapper::before {
+    content: "FOR YOU";
+
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    z-index: 10;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dominos-blue),
+            #0074d9
+        );
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    box-shadow:
+        0 4px 10px rgba(0, 85, 165, 0.25);
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes recommendationFadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .recommended-section {
+        margin-top: 50px;
+    }
+
+    .recommended-card-wrapper {
+        width: 235px;
+    }
+
+    .recommended-list {
+        gap: 18px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .recommended-section {
+        margin-top: 40px;
+
+        padding-top: 20px;
+    }
+
+    .recommended-header h2 {
+        font-size: 23px;
+    }
+
+    .recommended-header h2::before {
+        width: 34px;
+        height: 34px;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+    }
+
+    .recommended-reason {
+        margin-left: 44px;
+
+        font-size: 12px;
+
+        max-width: calc(100% - 44px);
+    }
+
+    .recommended-scroller {
+        padding:
+            12px 5px 22px;
+    }
+
     .recommended-card-wrapper {
         width: 220px;
     }
+
+    .recommended-list {
+        gap: 15px;
+    }
+
+    .recommended-scroller::before,
+    .recommended-scroller::after {
+        width: 25px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .recommended-card-wrapper {
+        width: 205px;
+    }
+
+    .recommended-header h2 {
+        font-size: 21px;
+    }
+
 }

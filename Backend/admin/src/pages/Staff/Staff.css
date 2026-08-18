@@ -1,233 +1,1023 @@
+/* =========================================================
+   STAFF MANAGEMENT
+========================================================= */
+
 .staff-management {
-    padding: 20px;
-    animation: fadeIn 0.4s ease;
+    width: 100%;
+    max-width: 1400px;
+    padding: 35px;
+    box-sizing: border-box;
+    animation: staffFadeIn 0.45s ease;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .staff-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
 }
 
 .staff-header h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    letter-spacing: -0.6px;
 }
 
+.staff-header h2::after {
+    content: "";
+
+    display: block;
+
+    width: 45px;
+    height: 4px;
+
+    margin-top: 8px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--dominos-red, #e31837),
+        var(--dominos-blue, #0055a5)
+    );
+}
+
+
+/* =========================================================
+   INVITE BUTTON
+========================================================= */
+
 .invite-btn {
-    background: var(--dominos-blue, #0055a5);
-    color: white;
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 150px;
+
+    padding: 13px 22px;
+
     border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 600;
+    border-radius: 11px;
+
+    background: linear-gradient(
+        135deg,
+        var(--dominos-blue, #0055a5),
+        #0074d9
+    );
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 750;
+
     cursor: pointer;
-    transition: 0.2s;
+
+    box-shadow:
+        0 8px 20px rgba(0, 85, 165, 0.22);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.invite-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.25),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+.invite-btn:hover::before {
+    left: 130%;
 }
 
 .invite-btn:hover {
-    background: #004080;
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(0, 85, 165, 0.3);
 }
 
-.staff-table-container {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border: 1px solid #eaeaea;
-    overflow-x: auto;
+.invite-btn:active {
+    transform: scale(0.98);
 }
+
+
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.staff-table-container {
+    width: 100%;
+
+    background: #fff;
+
+    border: 1px solid #e8ecf2;
+
+    border-radius: 18px;
+
+    overflow-x: auto;
+
+    box-shadow:
+        0 10px 35px rgba(20, 35, 60, 0.07),
+        0 2px 8px rgba(20, 35, 60, 0.03);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
 
 .staff-table {
     width: 100%;
+
     border-collapse: collapse;
+
+    min-width: 900px;
 }
 
-.staff-table th, .staff-table td {
-    padding: 15px 20px;
-    text-align: left;
-    border-bottom: 1px solid #f0f0f0;
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.staff-table thead {
+    background:
+        linear-gradient(
+            180deg,
+            #f8fafc,
+            #f4f6f9
+        );
 }
 
 .staff-table th {
-    background: #f9f9f9;
-    font-weight: 600;
-    color: #666;
+    padding: 17px 20px;
+
+    color: #657083;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-align: left;
+
     text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 0.5px;
+
+    letter-spacing: 0.8px;
+
+    border-bottom: 1px solid #e7ebf0;
+
+    white-space: nowrap;
 }
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.staff-table td {
+    padding: 18px 20px;
+
+    color: #3e4858;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #edf0f4;
+
+    vertical-align: middle;
+}
+
+.staff-table tbody tr {
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.staff-table tbody tr:hover {
+    background: #f9fbfd;
+}
+
+.staff-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   STAFF NAME + AVATAR
+========================================================= */
 
 .staff-name-col {
     display: flex;
+
     align-items: center;
+
     gap: 12px;
-    font-weight: 600;
-    color: #333;
+
+    color: #1d2635;
+
+    font-weight: 700;
+
+    white-space: nowrap;
 }
+
+
+/* Avatar */
 
 .staff-avatar {
-    width: 35px;
-    height: 35px;
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
     border-radius: 50%;
+
     object-fit: cover;
+
+    border: 2px solid #edf1f5;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.08);
 }
+
+
+/* Placeholder avatar */
 
 .staff-avatar.placeholder {
-    background: #eee;
-    color: #666;
     display: flex;
+
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dominos-blue, #0055a5),
+            #0074d9
+        );
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    box-shadow:
+        0 5px 14px rgba(0,85,165,0.2);
 }
+
+
+/* =========================================================
+   ROLE BADGES
+========================================================= */
 
 .role-badge {
-    padding: 5px 12px;
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 11px;
+
     border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
 }
 
-.role-badge.manager { background: #e3f2fd; color: #1565c0; }
-.role-badge.kitchen { background: #fff8e1; color: #f57f17; }
-.role-badge.delivery { background: #f3e5f5; color: #7b1fa2; }
+
+/* Manager */
+
+.role-badge.manager {
+    color: #1557a6;
+
+    background: #eaf3ff;
+
+    border: 1px solid #cfe3ff;
+}
+
+
+/* Kitchen */
+
+.role-badge.kitchen {
+    color: #a15c00;
+
+    background: #fff5df;
+
+    border: 1px solid #ffe2aa;
+}
+
+
+/* Delivery */
+
+.role-badge.delivery {
+    color: #7136a3;
+
+    background: #f5eaff;
+
+    border: 1px solid #e5cfff;
+}
+
+
+/* Owner */
+
+.role-badge.owner {
+    color: #b51d36;
+
+    background: #fff0f3;
+
+    border: 1px solid #ffd0d8;
+}
+
+
+/* Admin */
+
+.role-badge.admin,
+.role-badge.super_admin {
+    color: #096b51;
+
+    background: #e8f9f2;
+
+    border: 1px solid #c6eedf;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 .status-dot {
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+
+    width: 9px;
+    height: 9px;
+
     margin-right: 8px;
+
+    border-radius: 50%;
+
+    vertical-align: middle;
 }
 
-.status-dot.active { background: #4caf50; }
-.status-dot.inactive { background: #f44336; }
+
+/* Active */
+
+.status-dot.active {
+    background: #20b26b;
+
+    box-shadow:
+        0 0 0 4px rgba(32,178,107,0.12);
+}
+
+
+/* Inactive */
+
+.status-dot.inactive {
+    background: #aab1bb;
+
+    box-shadow:
+        0 0 0 4px rgba(170,177,187,0.12);
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
 
 .action-buttons {
     display: flex;
-    gap: 10px;
+
+    align-items: center;
+
+    gap: 7px;
+
+    white-space: nowrap;
 }
+
 
 .action-buttons button {
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
+
+    padding: 7px 12px;
+
+    border-radius: 7px;
+
     font-size: 12px;
+
+    font-weight: 700;
+
     cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
+
+
+/* Toggle */
 
 .btn-toggle {
-    background: #f5f5f5;
-    color: #333;
-    border: 1px solid #ddd !important;
+    color: #9b6500;
+
+    background: #fff5dd;
+
+    border: 1px solid #ffe1a5 !important;
 }
 
-.btn-toggle:hover { background: #e0e0e0; }
+.btn-toggle:hover {
+    background: #ffedc2;
+
+    transform: translateY(-1px);
+}
+
+
+/* Edit */
+
+.btn-edit {
+    background: #1890ff !important;
+
+    color: white !important;
+
+    border: none !important;
+
+    padding: 7px 13px !important;
+
+    border-radius: 7px !important;
+
+    margin: 0 !important;
+}
+
+.btn-edit:hover {
+    background: #087bd8 !important;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(24,144,255,0.25);
+}
+
+
+/* Delete */
 
 .btn-delete {
-    background: #ffebee;
-    color: #d32f2f;
+    color: #d52c43;
+
+    background: #fff0f2;
+
+    border: 1px solid #ffd5db !important;
 }
 
-.btn-delete:hover { background: #ffcdd2; }
+.btn-delete:hover {
+    background: #ffe2e6;
 
-.no-staff {
-    text-align: center;
-    padding: 40px !important;
-    color: #888;
+    transform: translateY(-1px);
 }
 
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-skeleton {
     display: flex;
+
     align-items: center;
     justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(4px);
+
+    min-height: 250px;
+
+    color: #788394;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f7f8fa 25%,
+            #eef1f5 50%,
+            #f7f8fa 75%
+        );
+
+    background-size: 200% 100%;
+
+    animation: loadingShimmer 1.5s infinite;
 }
+
+
+/* =========================================================
+   NO STAFF
+========================================================= */
+
+.no-staff {
+    padding: 60px 20px !important;
+
+    text-align: center;
+
+    color: #8a94a4 !important;
+
+    font-size: 14px !important;
+
+    background: #fafbfd;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(10, 20, 35, 0.62);
+
+    backdrop-filter: blur(7px);
+
+    animation: modalOverlayIn 0.25s ease;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: slideUp 0.3s ease;
+
+    max-width: 480px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid rgba(255,255,255,0.7);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.25);
+
+    animation: modalContentIn 0.3s ease;
 }
+
+
+/* Modal heading */
 
 .modal-content h3 {
-    margin: 0 0 20px 0;
-    font-size: 20px;
+    margin: 0 0 25px;
+
+    color: #172033;
+
+    font-size: 22px;
+    font-weight: 800;
 }
+
+
+/* Small heading accent */
+
+.modal-content h3::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin-top: 8px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--dominos-red, #e31837),
+            var(--dominos-blue, #0055a5)
+        );
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
 
 .form-group {
-    margin-bottom: 15px;
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 18px;
 }
+
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #444;
+    margin-bottom: 7px;
+
+    color: #4c5667;
+
+    font-size: 12px;
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
 }
 
-.form-group input, .form-group select {
+
+/* =========================================================
+   MODAL INPUTS
+========================================================= */
+
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
+
     box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid #dfe4eb;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #fafbfd;
+
+    color: #222c3b;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.form-group input:focus, .form-group select:focus {
-    border-color: var(--dominos-blue, #0055a5);
-    outline: none;
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #cbd3de;
 }
+
+
+.form-group input:focus,
+.form-group select:focus {
+    background: #fff;
+
+    border-color:
+        var(--dominos-blue, #0055a5);
+
+    box-shadow:
+        0 0 0 4px rgba(0,85,165,0.08);
+}
+
+
+/* Select */
+
+.form-group select {
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* =========================================================
+   FORM HELP TEXT
+========================================================= */
 
 .form-group small {
-    display: block;
-    margin-top: 5px;
-    color: #777;
-    font-size: 12px;
+    margin-top: 7px;
+
+    color: #8a94a4;
+
+    font-size: 11px;
+
+    line-height: 1.5;
 }
+
+
+/* =========================================================
+   MODAL ACTIONS
+========================================================= */
 
 .modal-actions {
     display: flex;
+
     justify-content: flex-end;
-    gap: 15px;
+
+    gap: 10px;
+
     margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #edf0f4;
 }
 
-.modal-actions button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-}
+
+/* Cancel */
 
 .btn-cancel {
-    background: #f5f5f5;
-    color: #333;
+    padding: 11px 20px;
+
+    border: 1px solid #dfe4eb;
+
+    border-radius: 9px;
+
+    background: #f7f8fa;
+
+    color: #5f6978;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
 }
+
+.btn-cancel:hover {
+    background: #eef1f5;
+
+    color: #303947;
+}
+
+
+/* Submit */
 
 .btn-submit {
-    background: var(--dominos-blue, #0055a5);
+    position: relative;
+
+    padding: 11px 22px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dominos-blue, #0055a5),
+            #0074d9
+        );
+
     color: white;
+
+    font-size: 13px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(0,85,165,0.2);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.btn-submit:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(0,85,165,0.28);
+}
+
+.btn-submit:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.staff-table-container::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.staff-table-container::-webkit-scrollbar-track,
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.staff-table-container::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb {
+    background: #cbd2dc;
+
+    border-radius: 10px;
+}
+
+.staff-table-container::-webkit-scrollbar-thumb:hover,
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #aeb7c4;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes staffFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes modalOverlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes modalContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+@keyframes loadingShimmer {
+    from {
+        background-position: 200% 0;
+    }
+
+    to {
+        background-position: -200% 0;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .staff-management {
+        padding: 25px;
+    }
+
+    .staff-header h2 {
+        font-size: 26px;
+    }
+
+    .staff-table {
+        min-width: 850px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .staff-management {
+        padding: 20px 15px;
+    }
+
+    .staff-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .staff-header h2 {
+        font-size: 24px;
+    }
+
+    .invite-btn {
+        width: 100%;
+    }
+
+    .staff-table-container {
+        border-radius: 14px;
+    }
+
+    .modal-content {
+        padding: 24px 18px;
+
+        border-radius: 16px;
+    }
+
+    .modal-content h3 {
+        font-size: 20px;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cancel,
+    .btn-submit {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .staff-management {
+        padding: 15px 10px;
+    }
+
+    .staff-header h2 {
+        font-size: 21px;
+    }
+
+    .modal-overlay {
+        padding: 12px;
+    }
+
+    .modal-content {
+        padding: 20px 15px;
+    }
 }

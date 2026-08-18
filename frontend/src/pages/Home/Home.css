@@ -1,0 +1,119 @@
+.home {
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f8fbff 45%,
+            #ffffff 100%
+        );
+}
+
+
+/* =========================
+   GLOBAL HOME SPACING
+========================= */
+
+.home-section {
+    width: 100%;
+}
+
+
+/* =========================
+   RECOMMENDED SECTION
+========================= */
+
+.home .recommended-section {
+    margin-top: 10px;
+}
+
+
+/* =========================
+   EXPLORE MENU
+========================= */
+
+.home .explore-menu {
+    margin-top: 15px;
+}
+
+
+/* =========================
+   FOOD DISPLAY
+========================= */
+
+.home .food-display {
+    margin-top: 10px;
+}
+
+
+/* =========================
+   SECTION TRANSITIONS
+========================= */
+
+.home > section {
+    position: relative;
+}
+
+
+/* Soft separator between sections */
+
+.home > section:not(:first-child)::before {
+    content: "";
+
+    display: block;
+
+    width: min(90%, 1100px);
+
+    height: 1px;
+
+    margin: 0 auto 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e8edf3,
+            transparent
+        );
+}
+
+
+/* =========================
+   PAGE CONTAINER
+========================= */
+
+.home-container {
+    width: min(1200px, 92%);
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .home .recommended-section {
+        margin-top: 5px;
+    }
+
+    .home .explore-menu {
+        margin-top: 10px;
+    }
+
+    .home > section:not(:first-child)::before {
+        margin-bottom: 18px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .home {
+        background: #ffffff;
+    }
+
+}

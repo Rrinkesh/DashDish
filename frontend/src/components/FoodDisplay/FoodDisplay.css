@@ -1,15 +1,280 @@
-.food-display{
-    margin-top: 30px;
+/* =========================================
+   FOOD DISPLAY
+========================================= */
+
+.food-display {
+    margin-top: 55px;
+
+    width: 100%;
 }
-.food-display h2{
-    font-size: max(2vw,24px);
-    font-weight: 600;
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.food-display h2 {
+    position: relative;
+
+    margin: 0;
+
+    font-size: clamp(24px, 2.5vw, 34px);
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    color: var(--text-dark);
+
+    letter-spacing: -0.8px;
 }
-.food-display-list{
+
+
+/* Small red accent */
+
+.food-display h2::before {
+    content: "";
+
+    display: inline-block;
+
+    width: 6px;
+    height: 28px;
+
+    margin-right: 12px;
+
+    vertical-align: -3px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--dominos-red),
+            #ff5269
+        );
+}
+
+
+/* =========================================
+   FOOD GRID
+========================================= */
+
+.food-display-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px, 1fr)
+        );
+
+    gap: 28px;
+
+    row-gap: 40px;
+
     margin-top: 30px;
-    gap: 30px;
-    row-gap: 50px;
-    
+
+    width: 100%;
+}
+
+
+/* =========================================
+   GRID HOVER AREA
+========================================= */
+
+.food-display-list > * {
+    min-width: 0;
+
+    animation:
+        foodCardAppear 0.5s ease both;
+}
+
+
+/* Staggered animation */
+
+.food-display-list > *:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.food-display-list > *:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.food-display-list > *:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.food-display-list > *:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.food-display-list > *:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.food-display-list > *:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.food-display-list > *:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.food-display-list > *:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.food-display > div:not(.food-display-list) {
+    margin-top: 35px;
+
+    padding: 55px 25px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f7f9ff
+        );
+
+    border:
+        1px solid var(--border-color);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.food-display > div:not(.food-display-list) h3 {
+    margin: 0;
+
+    color: var(--text-dark);
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+.food-display > div:not(.food-display-list) p {
+    color: var(--text-muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes foodCardAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   LARGE SCREEN
+========================================= */
+
+@media (min-width: 1400px) {
+
+    .food-display-list {
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 32px;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .food-display {
+        margin-top: 40px;
+    }
+
+    .food-display-list {
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(210px, 1fr)
+            );
+
+        gap: 22px;
+
+        row-gap: 30px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .food-display {
+        margin-top: 35px;
+    }
+
+    .food-display h2 {
+        font-size: 24px;
+    }
+
+    .food-display h2::before {
+        width: 5px;
+        height: 22px;
+
+        margin-right: 9px;
+    }
+
+    .food-display-list {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 15px;
+
+        row-gap: 22px;
+
+        margin-top: 22px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .food-display-list {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
 }
