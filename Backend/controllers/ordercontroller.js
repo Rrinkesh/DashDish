@@ -1,6 +1,7 @@
 const ordermodel =require('../models/ordermodel.js');
 const usermodel =require('../models/usermodel.js');
 const Stripe =require('stripe');
+const { sendDeliveryPinEmail } = require('../services/emailService');
 require("dotenv").config();
 
 const stripe =new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -169,6 +170,21 @@ const updatestatus = async(req,res) => {
                 const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
                 order.deliveryOTP = generatedOtp;
                 order.otpExpiresAt = new Date(Date.now() + 15 * 60000); // 15 mins expiry
+                
+                // Send email to order owner
+                try {
+                    const user = await usermodel.findById(order.userid);
+                    const email = order.address?.email || user?.email;
+                    if (email) {
+                        await sendDeliveryPinEmail({
+                            to: email,
+                            otp: generatedOtp,
+                            orderId: order._id
+                        });
+                    }
+                } catch (emailErr) {
+                    console.error("Failed to send delivery verification email:", emailErr);
+                }
             }
         } else {
             order.status = newStatus;
@@ -244,4 +260,46 @@ const rateDriver = async (req, res) => {
     }
 }
 
-module.exports={placeorder,verifyorder,userorders,listorders,updatestatus,rateDriver};
+const cancelOrder = async (req, res) => {
+    try {
+        const { orderId } = req.body;
+        const order = await ordermodel.findById(orderId);
+        if (!order) {
+            return res.json({ success: false, message: "Order not found" });
+        }
+
+        // Security check: ensure the logged-in user owns this order
+        if (order.userid !== req.body.userid) {
+            return res.json({ success: false, message: "Unauthorized to cancel this order" });
+        }
+
+        // Status check: only allow cancellation if not yet Preparing, Ready, Completed, or Cancelled
+        const cancellableStatuses = ['Pending', 'Accepted'];
+        if (!cancellableStatuses.includes(order.status)) {
+            return res.json({ success: false, message: `Cannot cancel order. It is already: ${order.status}` });
+        }
+
+        order.status = "Cancelled";
+        order.deliveryStatus = "Cancelled"; // Also set delivery status to Cancelled if assigned
+        await order.save();
+
+        // Broadcast cancellation via Socket.io
+        try {
+            const io = getIo();
+            if (order.userid) {
+                io.to(`customer_${order.userid}`).emit("order:updated", order);
+                io.to(`order_${order._id}`).emit("order:updated", order);
+            }
+            io.to("kitchen").to("admin").to("display_screen").emit("order:updated", order);
+        } catch (socketErr) {
+            console.error("Socket notification failed on cancellation:", socketErr);
+        }
+
+        res.json({ success: true, message: "Order cancelled successfully" });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: "Error cancelling order" });
+    }
+};
+
+module.exports={placeorder,verifyorder,userorders,listorders,updatestatus,rateDriver,cancelOrder};

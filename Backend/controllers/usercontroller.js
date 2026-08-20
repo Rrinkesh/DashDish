@@ -33,6 +33,13 @@ const loginuser =async (req,res)=>{
     const ismatch=await bcrypt.compare(password,user.password);
     if(!ismatch){
         return res.json({success:false,message:"invalid credentials"})}
+    
+    // Auto-verify staff/admin roles if they are not yet verified
+    if (user.role && user.role !== 'CUSTOMER' && user.isVerified === false) {
+        user.isVerified = true;
+        await user.save();
+    }
+
     if (user.isVerified === false) {
         return res.json({success: false, message: "User is not verified. Please complete verification."});
     }

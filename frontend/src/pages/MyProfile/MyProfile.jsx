@@ -15,7 +15,8 @@ const MyProfile = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         
-        if (!token) {
+        const activeToken = token || localStorage.getItem("token");
+        if (!activeToken) {
             navigate('/');
             return;
         }
@@ -23,7 +24,7 @@ const MyProfile = () => {
         const fetchProfile = async () => {
             try {
                 // Using POST to ensure req.body is available for the authmiddleware in the backend
-                const response = await axios.post(url + "/api/user/profile", {}, { headers: { token } });
+                const response = await axios.post(url + "/api/user/profile", {}, { headers: { token: activeToken } });
                 if (response.data.success) {
                     setUserData(response.data.data);
                 } else {

@@ -134,6 +134,13 @@
 
 }
 
+.stat-box.active-filter {
+    border-top-color: #ef4444;
+    background: #f8fafc;
+    box-shadow: 0 15px 35px rgba(239, 68, 68, 0.15);
+    transform: translateY(-5px);
+}
+
 
 
 .stat-box h4 {

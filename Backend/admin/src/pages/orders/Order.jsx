@@ -8,6 +8,7 @@ import { getAdminSocket } from '../../services/socket';
 const Order = ({ url }) => {
   const [allOrders, setAllOrders] = useState([]);
   const [order, setorders] = useState([]);
+  const [filter, setFilter] = useState('Active'); // 'Active' (default), 'Pending', 'Preparing', 'Ready', 'Completed'
   const [selectedMonth, setSelectedMonth] = useState(() => {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; // YYYY-MM
@@ -102,6 +103,27 @@ const Order = ({ url }) => {
     };
   }, [])
 
+  const getFilteredOrders = () => {
+    return order.filter(o => {
+      if (filter === 'Active') {
+        return o.status !== 'Completed' && o.status !== 'Cancelled';
+      }
+      if (filter === 'Pending') {
+        return o.status === 'Pending' || o.status === 'food processing...';
+      }
+      if (filter === 'Preparing') {
+        return o.status === 'Preparing';
+      }
+      if (filter === 'Ready') {
+        return o.status === 'Ready';
+      }
+      if (filter === 'Completed') {
+        return o.status === 'Completed';
+      }
+      return true;
+    });
+  };
+
   return (
     <div className='order add'>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
@@ -118,15 +140,93 @@ const Order = ({ url }) => {
       </div>
       
       <div className="admin-stats-bar">
-        <div className="stat-box"><h4>Pending</h4><p>{stats.pending}</p></div>
-        <div className="stat-box"><h4>Preparing</h4><p>{stats.preparing}</p></div>
-        <div className="stat-box"><h4>Ready</h4><p>{stats.ready}</p></div>
-        <div className="stat-box"><h4>Completed</h4><p>{stats.completed}</p></div>
-        <div className="stat-box revenue"><h4>Revenue ({selectedMonth})</h4><p>₹{stats.revenue}</p></div>
+        <div 
+          className={`stat-box ${filter === 'Pending' ? 'active-filter' : ''}`}
+          onClick={() => setFilter(prev => prev === 'Pending' ? 'Active' : 'Pending')}
+          style={{ cursor: 'pointer' }}
+        >
+          <h4>Pending</h4>
+          <p>{stats.pending}</p>
+        </div>
+        <div 
+          className={`stat-box ${filter === 'Preparing' ? 'active-filter' : ''}`}
+          onClick={() => setFilter(prev => prev === 'Preparing' ? 'Active' : 'Preparing')}
+          style={{ cursor: 'pointer' }}
+        >
+          <h4>Preparing</h4>
+          <p>{stats.preparing}</p>
+        </div>
+        <div 
+          className={`stat-box ${filter === 'Ready' ? 'active-filter' : ''}`}
+          onClick={() => setFilter(prev => prev === 'Ready' ? 'Active' : 'Ready')}
+          style={{ cursor: 'pointer' }}
+        >
+          <h4>Ready</h4>
+          <p>{stats.ready}</p>
+        </div>
+        <div 
+          className={`stat-box ${filter === 'Completed' ? 'active-filter' : ''}`}
+          onClick={() => setFilter(prev => prev === 'Completed' ? 'Active' : 'Completed')}
+          style={{ cursor: 'pointer' }}
+        >
+          <h4>Completed</h4>
+          <p>{stats.completed}</p>
+        </div>
+        <div className="stat-box revenue">
+          <h4>Revenue ({selectedMonth})</h4>
+          <p>₹{stats.revenue}</p>
+        </div>
+      </div>
+
+      <div className="filter-controls-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '15px', marginBottom: '20px', flexWrap: 'wrap', background: 'white', padding: '15px 20px', borderRadius: '15px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <span style={{ fontWeight: 'bold', color: '#64748b', fontSize: '14px' }}>Filter:</span>
+          {['Active', 'Pending', 'Preparing', 'Ready'].map((type) => (
+            <button
+              key={type}
+              onClick={() => setFilter(type)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '8px',
+                border: '1px solid #e2e8f0',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                background: filter === type ? '#6366f1' : 'white',
+                color: filter === type ? 'white' : '#475569',
+                cursor: 'pointer',
+                transition: '0.2s'
+              }}
+            >
+              {type === 'Active' ? 'All Active' : type}
+            </button>
+          ))}
+        </div>
+        
+        <button
+          onClick={() => setFilter(prev => prev === 'Completed' ? 'Active' : 'Completed')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: '1px solid #cbd5e1',
+            fontWeight: 'bold',
+            fontSize: '14px',
+            background: filter === 'Completed' ? '#16a34a' : 'white',
+            color: filter === 'Completed' ? 'white' : '#16a34a',
+            borderColor: '#16a34a',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: '0.2s',
+            boxShadow: filter === 'Completed' ? '0 4px 12px rgba(22, 163, 74, 0.2)' : 'none'
+          }}
+        >
+          📜 {filter === 'Completed' ? 'Showing History' : 'Order History'}
+        </button>
       </div>
 
       <div className="order-list">
-        {order.slice().reverse().map((order, index) => (
+        {getFilteredOrders().slice().reverse().map((order, index) => (
           <div className='order-item' key={index}>
             <img src={assets.parcel} width={100} alt="" />
             <div>

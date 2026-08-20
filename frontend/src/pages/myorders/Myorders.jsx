@@ -13,15 +13,24 @@ const Myorders = () => {
 
     const navigate = useNavigate();
 
-    const fetchOrders = async () => {
+    const isHistoryPage = window.location.pathname === '/history';
+
+    const filteredOrders = data.filter(order => {
+        const isPast = order.status === 'Completed' || order.status === 'Cancelled' || order.deliveryStatus === 'Delivered';
+        return isHistoryPage ? isPast : !isPast;
+    });
+
+    const fetchOrders = async (activeToken) => {
         try {
             setLoading(true);
+            const currentToken = activeToken || token || localStorage.getItem("token");
+            if (!currentToken) return;
 
             const response = await axios.post(
                 `${url}/api/order/userorders`,
                 {},
                 {
-                    headers: { token }
+                    headers: { token: currentToken }
                 }
             );
 
@@ -36,8 +45,9 @@ const Myorders = () => {
     };
 
     useEffect(() => {
-        if (token) {
-            fetchOrders();
+        const activeToken = token || localStorage.getItem("token");
+        if (activeToken) {
+            fetchOrders(activeToken);
         } else {
             setLoading(false);
         }
@@ -179,6 +189,38 @@ const Myorders = () => {
         }
     };
 
+    const handleCancelOrder = async (orderId) => {
+        if (!window.confirm("Are you sure you want to cancel this order?")) {
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                `${url}/api/order/cancel`,
+                { orderId },
+                {
+                    headers: { token }
+                }
+            );
+
+            if (response.data.success) {
+                setData(prevData =>
+                    prevData.map(order =>
+                        order._id === orderId
+                            ? { ...order, status: 'Cancelled', deliveryStatus: 'Cancelled' }
+                            : order
+                    )
+                );
+                alert("Order cancelled successfully!");
+            } else {
+                alert(response.data.message || "Failed to cancel order");
+            }
+        } catch (error) {
+            console.error("Error cancelling order:", error);
+            alert("Error cancelling order. Please try again.");
+        }
+    };
+
     /* =========================
        LOADING
     ========================= */
@@ -212,12 +254,13 @@ const Myorders = () => {
                     </span>
 
                     <h1>
-                        My <span>Orders</span>
+                        {isHistoryPage ? <>Order <span>History</span></> : <>My <span>Orders</span></>}
                     </h1>
 
                     <p>
-                        Track your delicious orders and see their
-                        delivery progress in real time.
+                        {isHistoryPage 
+                            ? "View all your past orders, details, and invoice history." 
+                            : "Track your delicious orders and see their delivery progress in real time."}
                     </p>
                 </div>
 
@@ -229,7 +272,7 @@ const Myorders = () => {
 
             {/* EMPTY STATE */}
 
-            {data.length === 0 ? (
+            {filteredOrders.length === 0 ? (
 
                 <div className="empty-orders">
 
@@ -237,11 +280,12 @@ const Myorders = () => {
                         🛍️
                     </div>
 
-                    <h2>No orders yet</h2>
+                    <h2>{isHistoryPage ? "No history found" : "No active orders"}</h2>
 
                     <p>
-                        Looks like you haven't ordered anything.
-                        Let's fix that!
+                        {isHistoryPage 
+                            ? "Looks like you don't have any past orders in your account."
+                            : "Looks like you haven't ordered anything recently. Let's fix that!"}
                     </p>
 
                     <button onClick={() => navigate('/')}>
@@ -254,7 +298,7 @@ const Myorders = () => {
 
                 <div className="orders-container">
 
-                    {data.map((order, index) => {
+                    {filteredOrders.map((order, index) => {
 
                         const orderType = getOrderType(order);
 
@@ -618,6 +662,15 @@ const Myorders = () => {
                                     </span>
 
                                     <div className="order-actions">
+
+                                        {['Pending', 'Accepted'].includes(order.status) && (
+                                            <button
+                                                className="cancel-order-btn"
+                                                onClick={() => handleCancelOrder(order._id)}
+                                            >
+                                                ❌ Cancel Order
+                                            </button>
+                                        )}
 
                                         {paymentPaid && (
 

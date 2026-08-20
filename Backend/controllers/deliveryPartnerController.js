@@ -31,6 +31,7 @@ const addPartner = async (req, res) => {
             role: 'DELIVERY',
             restaurantId: owner.restaurantId,
             isActive: true,
+            isVerified: true,
             createdBy: ownerId
         });
         const savedUser = await newUser.save();

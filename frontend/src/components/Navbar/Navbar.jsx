@@ -373,6 +373,33 @@ const Navbar = ({ setshowlogin }) => {
 
                                 </div>
 
+                                {/* ORDER HISTORY */}
+                                <div
+                                    className="profile-dropdown-item"
+                                    onClick={() => {
+                                        setShowProfileDropdown(false);
+                                        navigate('/history');
+                                    }}
+                                >
+                                    <div className="dropdown-icon">
+                                        <img
+                                            src={assets.bag}
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div className="dropdown-text">
+                                        <strong>
+                                            Order History
+                                        </strong>
+                                        <span>
+                                            View past orders
+                                        </span>
+                                    </div>
+                                    <span className="dropdown-arrow">
+                                        →
+                                    </span>
+                                </div>
+
 
                                 <div className="dropdown-divider"></div>
 

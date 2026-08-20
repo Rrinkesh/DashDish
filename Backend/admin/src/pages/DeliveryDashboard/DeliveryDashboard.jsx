@@ -56,6 +56,17 @@ const DeliveryDashboard = ({ url }) => {
         }
     }, [url, token]);
 
+    const fetchStatus = useCallback(async () => {
+        try {
+            const response = await axios.get(`${url}/api/delivery/status`, { headers: { token } });
+            if (response.data.success) {
+                setStatus(response.data.status);
+            }
+        } catch (error) {
+            console.error("Error fetching driver status", error);
+        }
+    }, [url, token]);
+
     const toggleStatus = async () => {
         const newStatus = status === 'OFFLINE' ? 'ONLINE' : 'OFFLINE';
         try {
@@ -71,6 +82,7 @@ const DeliveryDashboard = ({ url }) => {
 
     useEffect(() => {
         fetchDeliveries();
+        fetchStatus();
         const socket = getAdminSocket();
 
         socket.on("delivery:assigned", () => {
@@ -83,7 +95,7 @@ const DeliveryDashboard = ({ url }) => {
             socket.off("delivery:assigned");
             socket.off("order:updated");
         };
-    }, [fetchDeliveries]);
+    }, [fetchDeliveries, fetchStatus]);
 
     // Live Tracking Loop
     useEffect(() => {

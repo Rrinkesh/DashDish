@@ -1032,6 +1032,34 @@
     transform: translateY(-2px);
 }
 
+.cancel-order-btn {
+    padding: 10px 16px;
+
+    border: 1px solid #f8d7da;
+
+    border-radius: 9px;
+
+    background: #fff5f5;
+
+    color: var(--dominos-red);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.cancel-order-btn:hover {
+    background: #ffe3e3;
+
+    border-color: var(--dominos-red);
+
+    transform: translateY(-2px);
+}
+
 
 .footer-track {
     padding: 10px 16px;
@@ -1467,6 +1495,7 @@
 
 
     .invoice-btn,
+    .cancel-order-btn,
     .footer-track {
         flex: 1;
 

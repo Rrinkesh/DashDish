@@ -1,5 +1,5 @@
 const express = require('express');
-const { updateAvailability, assignDriver, verifyOTP, completeDelivery, getAvailableDrivers, rejectDelivery, acceptDelivery } = require('../controllers/deliveryController');
+const { updateAvailability, assignDriver, verifyOTP, completeDelivery, getAvailableDrivers, rejectDelivery, acceptDelivery, getAvailability } = require('../controllers/deliveryController');
 const { addPartner, getPartners, editPartner, togglePartnerStatus } = require('../controllers/deliveryPartnerController');
 const { authmiddleware } = require('../middleware/auth');
 const { authorizeRoles } = require('../middleware/roleMiddleware');
@@ -8,6 +8,7 @@ const deliveryRoute = express.Router();
 
 // Driver routes
 deliveryRoute.post('/status', authmiddleware, authorizeRoles('DELIVERY'), updateAvailability);
+deliveryRoute.get('/status', authmiddleware, authorizeRoles('DELIVERY'), getAvailability);
 deliveryRoute.post('/verify-otp', authmiddleware, authorizeRoles('DELIVERY'), verifyOTP);
 deliveryRoute.post('/complete', authmiddleware, authorizeRoles('DELIVERY'), completeDelivery);
 deliveryRoute.post('/accept', authmiddleware, authorizeRoles('DELIVERY'), acceptDelivery);

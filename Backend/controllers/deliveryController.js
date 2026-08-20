@@ -284,4 +284,17 @@ const rejectDelivery = async (req, res) => {
     }
 };
 
-module.exports = { updateAvailability, assignDriver, verifyOTP, completeDelivery, getAvailableDrivers, acceptDelivery, rejectDelivery };
+const getAvailability = async (req, res) => {
+    try {
+        const driver = await deliveryPartnerModel.findOne({ userId: req.body.userid });
+        if (!driver) {
+            return res.json({ success: true, status: 'OFFLINE' });
+        }
+        res.json({ success: true, status: driver.availabilityStatus });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: "Error fetching availability status" });
+    }
+};
+
+module.exports = { updateAvailability, assignDriver, verifyOTP, completeDelivery, getAvailableDrivers, acceptDelivery, rejectDelivery, getAvailability };
