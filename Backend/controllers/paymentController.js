@@ -5,8 +5,8 @@ const paymentModel = require('../models/paymentModel');
 const { getIo } = require('../socket/socketHandler');
 
 const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_mockkey123',
-    key_secret: process.env.RAZORPAY_KEY_SECRET || 'mocksecret123'
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 // 1. Create Order (Returns Razorpay order ID to frontend)
@@ -46,7 +46,7 @@ const verifyPayment = async (req, res) => {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId, method, customerId } = req.body;
         
-        const secret = process.env.RAZORPAY_KEY_SECRET || 'mocksecret123';
+        const secret = process.env.RAZORPAY_KEY_SECRET;
         
         const shasum = crypto.createHmac('sha256', secret);
         shasum.update(`${razorpay_order_id}|${razorpay_payment_id}`);

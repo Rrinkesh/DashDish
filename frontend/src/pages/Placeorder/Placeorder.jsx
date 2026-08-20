@@ -141,7 +141,7 @@ const Placeorder = () => {
       }
       
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_TQtrY2pVD7enH4',
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: res.data.amount,
         currency: res.data.currency,
         name: "DashDish",
